@@ -10,10 +10,10 @@ CSCI 5117, Spring 2023, [assignment description](https://canvas.umn.edu/courses/
 
 ### Students
 
-* Fiorela Equivel Martinez 
-  Hoin Jang, hoin0784@umn.edu
-  Monika Bartulovic, bartu043@umn.edu
-  Sol Kim
+* Fiorela Equivel Martinez esqui049@umn.edu
+* Hoin Jang, jang0064@umn.edu
+* Monika Bartulovic, bartu043@umn.edu
+* Sol Kim kim01540@umn.edu
 * ...
 
 
