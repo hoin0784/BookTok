@@ -5,12 +5,15 @@ CSCI 5117, Spring 2023, [assignment description](https://canvas.umn.edu/courses/
 ## App Info:
 
 * Team Name: Booktok
-* App Name: TODO
+* App Name: Booktok
 * App Link: <https://TODO.com/>
 
 ### Students
 
-* First Last, x500@umn.edu
+* Fiorela Equivel Martinez 
+  Hoin Jang, hoin0784@umn.edu
+  Monika Bartulovic, bartu043@umn.edu
+  Sol Kim
 * ...
 
 
