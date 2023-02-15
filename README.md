@@ -4,7 +4,7 @@ CSCI 5117, Spring 2023, [assignment description](https://canvas.umn.edu/courses/
 
 ## App Info:
 
-* Team Name: TODO
+* Team Name: Booktok
 * App Name: TODO
 * App Link: <https://TODO.com/>
 
