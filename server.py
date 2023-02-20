@@ -15,6 +15,11 @@ def BookShelf():
 def Account():
   return render_template('Account.html')
 
+@app.route('/Genres')
+def Genres():
+  return render_template('Genres.html')
+
+
 if __name__ == '__main__':
 
   # Added for debugging 
