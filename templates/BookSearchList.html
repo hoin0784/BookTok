@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Book Search Results!</title>
-</head>
-<body>
+{% extends "Navi.html" %}
+{% block title %} Book Search Results! {% endblock %}
+
+{% block content %}
+
     Book Search Results!
   
   <!-- https://covers.openlibrary.org/b/$key/$value-$size.jpg  -->
@@ -19,15 +17,13 @@
         <li><br>
             <img src = "https://covers.openlibrary.org/b/isbn/{{isbn[i]}}-L.jpg" alt="Book picture"/><br>
             {{book_title[i]}}<br>
-            {{author_name}}<br>
+            {{author_name[i]}}<br>
             {{isbn[i]}}<br>
         </li>
       </div>
       <br>
-      {%endfor%}
+      {% endfor %}
     </ul>
   </div>
-  
 
-</body>
-</html>
+{% endblock %}
