@@ -204,7 +204,7 @@
    */
   @media (min-width: 767px) {
     .banner-head {
-      font-size: 4em;
+      font-size: 3em;
     }
     .pricing-table {
       margin-bottom: 0;
@@ -220,7 +220,7 @@
       height: 400px;
     }
     .banner-head {
-      font-size: 3em;
+      font-size: 2em;
     }
   }
   
