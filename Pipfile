@@ -8,6 +8,7 @@ flask = "*"
 psycopg2 = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+requests = "*"
 
 [dev-packages]
 
