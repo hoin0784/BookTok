@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/navi.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A layout example that shows off a responsive pricing table.">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" 
+                               integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" 
+                               crossorigin="anonymous">
+
+        <link rel="stylesheet" href="/static/navi.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+        <link rel="stylesheet" href="/css/pure/pure-min.css">
+        <link rel="stylesheet" href="/css/pure/grids-responsive-min.css">
+        <link rel="stylesheet" href="/static/style.css">
+        
+        <title> {% block title %} {% endblock %}</title>
+                
     </head>
     <body>
         <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
@@ -19,12 +30,14 @@
             </div>
             <div class="pure-u-1 pure-u-md-1-3">
                 <li class="pure-menu-item">
-                    <form class="pure-form">
-                        <input type="text" class="pure-input-rounded searchBox" placeholder="Search for book" required="" />
+                    <!-- Search list form (start)-->
+                    <form class="pure-form" action="{{url_for('BookSearchList')}}" method="post">
+                        <input type="text" name = "BookTitle" class="pure-input-rounded searchBox" placeholder="Search for book" required="" />
                         <button type="submit" class="pure-button searchButton">
                             <img class="searchImg" src="/static/searchIcon.png" alt="submit" />
                         </button>
                     </form>
+                    <!-- Search list form (end)-->
                 </li>
             </div>
             <div class="pure-u-1 pure-u-md-1-3 menu-items-margin login-button">
@@ -34,5 +47,7 @@
             </div>
         </div>
         
+        {% block content %} {% endblock %}
+
     </body>
 </html>

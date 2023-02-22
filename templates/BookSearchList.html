@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Search Results!</title>
+</head>
+<body>
+    Book Search Results!
+  
+  <!-- https://covers.openlibrary.org/b/$key/$value-$size.jpg  -->
+  <!-- key can be any one of ISBN, OCLC, LCCN, OLID and ID (case-insensitive)
+       value is the value of the chosen key
+       size can be one of S, M and L for small, medium and large respectively. -->
+
+  <div>
+    <ul>
+      {% for i in range(count): %}
+      <div>
+        <li><br>
+            <img src = "https://covers.openlibrary.org/b/isbn/{{isbn[i]}}-L.jpg" alt="Book picture"/><br>
+            {{book_title[i]}}<br>
+            {{author_name}}<br>
+            {{isbn[i]}}<br>
+        </li>
+      </div>
+      <br>
+      {%endfor%}
+    </ul>
+  </div>
+  
+
+</body>
+</html>
