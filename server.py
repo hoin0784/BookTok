@@ -52,6 +52,18 @@ def Account():
 def Genres():
   return render_template('Genres.html')
 
+@app.route('/romance')
+def Romance():
+  return render_template('Romance.html')
+
+@app.route('/thriller')
+def Thriller():
+  return render_template('Thriller.html')
+
+@app.route('/nonfiction')
+def Nonfiction():
+  return render_template('Nonfiction.html')
+
 # @app.route('/BookSearchList', methods = ['GET'])
 # def BookSearchList():
 

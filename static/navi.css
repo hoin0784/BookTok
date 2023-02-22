@@ -46,8 +46,6 @@ label {
     text-align: center;
 }
 
-
-
 /*
  * -- PURE FORM STYLES --
  * Style the form inputs and labels
@@ -197,8 +195,8 @@ label {
 .searchButton{
     background-color: transparent;
     border-color: transparent;
-    width:20px;
-    height: 20px;
+    width:30px;
+    height: 30px;
 }
 
 .searchImg{
