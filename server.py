@@ -64,6 +64,18 @@ def Thriller():
 def Nonfiction():
   return render_template('Nonfiction.html')
 
+@app.route('/horror')
+def Horror():
+  return render_template('Horror.html')
+
+@app.route('/ya')
+def YoungAdult():
+  return render_template('YoungAdult.html')
+
+@app.route('/comedy')
+def Comedy():
+  return render_template('Comedy.html')
+
 # @app.route('/BookSearchList', methods = ['GET'])
 # def BookSearchList():
 

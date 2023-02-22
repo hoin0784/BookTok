@@ -48,22 +48,6 @@
    */
 
 
-  .romanceBanner div {
-    background: pink;
-    /* height: 20px; */
-    width: 40%;
-    border-color: black;
-    margin: auto;
-    margin-left: auto;
-    margin-block:inherit;
-    /* display: table; */
-  }
-
-  .grid-container{
-    display: block;
-    border-color: black;
-  }
-
   .banner-head {
     text-align: center;
     margin-bottom: 150px;
@@ -83,6 +67,9 @@
     margin: 0 auto;
   }
   .genres {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);  
     margin-bottom: 3.125em;
     text-align: center;
   }
@@ -111,6 +98,18 @@
 
   .genre-table-nf .genre-table-header {
     background-color: lightcoral;
+  }
+
+  .genre-table-horror .genre-table-header {
+    background-color: lightskyblue;
+  }
+
+  .genre-table-ya .genre-table-header {
+    background-color: lightgreen;
+  }
+
+  .genre-table-comedy .genre-table-header {
+    background-color: lightsalmon;
   }
   
   /*
