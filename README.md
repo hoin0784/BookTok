@@ -67,3 +67,8 @@ relied on external code, expertise, or anything else, please disclose that
 here:**
 
 ...
+
+
+## Notes
+
+* use command [python -m pip install requests] to install the Requests http library

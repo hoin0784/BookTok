@@ -88,6 +88,22 @@
 
     </div> <!-- end l-content -->
 
+    <div>
+        <ul>
+          {% for i in range(length): %}
+          <div>
+            <li><br>
+                <img src = "{{cover_url[i]}}" alt="Book picture"/><br>
+                {{featured_title[i]}}<br>
+                {{featured_author[i]}}<br>
+            </li>
+          </div>
+          <br>
+          {% endfor %}
+        </ul>
+      </div>
+
+
     <div class="footer l-box">
         <p>
             <a href="#">Try now</a> for 14 days. No credit card required. Header image courtesy of <a

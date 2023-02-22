@@ -1,4 +1,4 @@
-from flask import Flask , render_template,request, url_for
+from flask import Flask , render_template,request, url_for, jsonify, json
 
 import requests
 
@@ -7,7 +7,38 @@ app = Flask(__name__)
 # Just added basic routes
 @app.route('/')
 def Home():
-  return render_template('Home.html')
+  # Requests NYT Bestseller 'combined print and ebook fiction' list (there's a lot of lists we can request)
+  requestUrl = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=Jn4QJ3QZomcadk6kUzr7GKmJubrMVB6y"
+  requestHeaders = {
+    "Accept": "application/json"
+  }
+  response = requests.get(requestUrl, headers=requestHeaders)
+
+  # Turn json into a python dictionary
+  response_dict = json.loads(response.text)
+
+  # Get only book list info from response_dict
+  book_dict = response_dict["results"]["books"]
+
+  # Arrays that will hold featured list data (title, author, cover url)
+  featured_title = []
+  featured_author = []
+  featured_cover = []
+
+  # Get only necessary data for featured list from book_dict
+  for i in book_dict:
+    featured_title.append(i["title"])
+    featured_author.append(i["author"])
+    featured_cover.append(i["book_image"])    
+
+  length = len(featured_title)
+
+  # Send featured list data to Home.html
+  return render_template('Home.html', length = length,
+                                      cover_url = featured_cover, 
+                                      featured_title = featured_title, 
+                                      featured_author = featured_author)
+
 
 @app.route('/bookshelf')
 def BookShelf():
