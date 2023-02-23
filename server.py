@@ -1,8 +1,14 @@
 from flask import Flask , render_template,request, url_for, jsonify, json
 
 import requests
+import db
 
 app = Flask(__name__)
+
+# Operates when accessing the URL for the first time
+@app.before_first_request
+def initialize():
+  db.setup()
 
 # Just added basic routes
 @app.route('/')
@@ -75,17 +81,6 @@ def YoungAdult():
 @app.route('/comedy')
 def Comedy():
   return render_template('Comedy.html')
-
-# @app.route('/BookSearchList', methods = ['GET'])
-# def BookSearchList():
-
-#   title = request.args.get('BookTitle')
-#   print("---- GET TEST ----")
-#   print(title)
-
-#   return render_template('BookSearchList.html')
-
-
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def BookSearchList():
