@@ -56,31 +56,78 @@ def Account():
 
 @app.route('/genres')
 def Genres():
-  return render_template('Genres.html')
+  return render_template('genres.html')
 
 @app.route('/romance')
 def Romance():
-  return render_template('Romance.html')
+      
+  #Requests Open Library API for genres
+  request_url = "https://openlibrary.org/subjects/romance.json?"
+  request_headers = {
+    "Accept": "application/json"
+  }
+  response = requests.get(request_url, headers=request_headers)
+  response_dict = json.loads(response.text)
+  book_dict = response_dict["works"]
+
+  romance_title = []
+  romance_author = []
+  romance_genre = []
+  
+  for i in book_dict:
+    romance_title.append(i["title"])
+    romance_genre.append(i["subject"])
+    romance_author.append(i["authors"])
+    
+  length = len(romance_title)
+  
+  return render_template('romance.html', length = length, 
+                                         romance_title = romance_title, 
+                                         romance_genre = romance_genre,
+                                         romance_author = romance_author)
 
 @app.route('/thriller')
 def Thriller():
-  return render_template('Thriller.html')
+    #Requests Open Library API for genres
+  request_url = "https://openlibrary.org/subjects/thriller.json?"
+  request_headers = {
+    "Accept": "application/json"
+  }
+  response = requests.get(request_url, headers=request_headers)
+  response_dict = json.loads(response.text)
+  book_dict = response_dict["works"]
+
+  thriller_title = []
+  thriller_author = []
+  thriller_genre = []
+  
+  for i in book_dict:
+    thriller_title.append(i["title"])
+    thriller_genre.append(i["subject"])
+    thriller_author.append(i["authors"])
+    
+  length = len(thriller_title)
+  
+  return render_template('thriller.html', length = length, 
+                                         thriller_title = thriller_title, 
+                                         thriller_genre = thriller_genre,
+                                         thriller_author = thriller_author)
 
 @app.route('/nonfiction')
 def Nonfiction():
-  return render_template('Nonfiction.html')
+  return render_template('nonfiction.html')
 
 @app.route('/horror')
 def Horror():
-  return render_template('Horror.html')
+  return render_template('horror.html')
 
 @app.route('/ya')
 def YoungAdult():
-  return render_template('YoungAdult.html')
+  return render_template('young_adult.html')
 
 @app.route('/comedy')
 def Comedy():
-  return render_template('Comedy.html')
+  return render_template('comedy.html')
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def BookSearchList():

@@ -3,4 +3,21 @@
 
 {% block content %}
    <h1>Romance</h1>
-{% endblock %}
+   <br>
+
+<div>
+   <ul>
+     {% for i in range(length): %}
+     <div>
+       <li><br>
+         
+           {{romance_title[i]}}<br>
+           {{romance_author[i]}}<br>
+       </li>
+     </div>
+     <br>
+     {% endfor %}
+   </ul>
+ </div>
+
+ {% endblock %}
