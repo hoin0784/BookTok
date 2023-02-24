@@ -58,7 +58,7 @@ def Account():
 def Genres():
   return render_template('genres.html')
 
-@app.route('/romance')
+@app.route('/romance', methods = ['GET','POST'])
 def Romance():
       
   #Requests Open Library API for genres
@@ -88,7 +88,7 @@ def Romance():
 
 @app.route('/thriller')
 def Thriller():
-    #Requests Open Library API for genres
+  #Requests Open Library API for genres
   request_url = "https://openlibrary.org/subjects/thriller.json?"
   request_headers = {
     "Accept": "application/json"

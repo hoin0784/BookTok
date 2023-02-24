@@ -14,10 +14,10 @@
     <script>
         
     $(document).ready(function() {
-        $('#romanceButton').click(function() {
+        $('#romance_button').click(function() {
             window.location.href = '/romance';
         });
-        $('#thrillerButton').click(function() {
+        $('#genre_thriller').click(function() {
             window.location.href = '/thriller';
         });
         $('#nfButton').click(function() {
@@ -48,12 +48,12 @@
     <div class="genres pure-g">
         <div class="pure-u-1 pure-u-md-1-3">
             <div class="genre-table genre-table-romance">
-                    <h2>Romance</h2>
+                    <h2> <button type = "submit" id = "romance_button" Button </button>Romance</h2>
             </div>
         </div>
 
         <div class="pure-u-1 pure-u-md-1-3">
-            <div class="genre-table genre-table-thriller">
+            <div class="genre-table genre-table-thriller" id = "genre_thriller">
                     <h2>Thriller</h2>
             </div>
         </div>

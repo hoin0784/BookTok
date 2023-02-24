@@ -153,6 +153,10 @@
   .footer a {
     color: #ddd;
   }
+
+  #genre_thriller:hover{  
+    background-color: aqua;
+  }
   
   /*
    * -- TABLET MEDIA QUERIES --
