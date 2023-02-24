@@ -68,19 +68,19 @@ label {
  * -- PURE BUTTON STYLES --
  * I want my pure-button elements to look a little different
  */
-/* .pure-button {
-    background-color: #c04e4e;
-    color: rgb(19, 16, 16);
-    padding: 0.5em 2em;
+.pure-button {
+    background-color: white;
+    /* color: rgb(19, 16, 16); */
+    /* padding: 0.5em 2em; */
     border-radius: 5px;
-} */
+}
 
-/* a.pure-button-primary {
-    background: rgb(85, 31, 31);
+a.pure-button-primary {
+    background: white;
     color: #1f8dd6;
     border-radius: 5px;
     font-size: 120%;
-} */
+}
 
 
 /*
