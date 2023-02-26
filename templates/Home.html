@@ -106,21 +106,22 @@
     </form>
      <!-- end l-content -->
 
-    <div>
-        <ul>
-          {% for i in range(length): %}
-          <div>
-            <li><br>
-                <img src = "{{cover_url[i]}}" alt="Book picture"/><br>
-                {{featured_title[i]}}<br>
-                {{featured_author[i]}}<br>
-            </li>
-          </div>
-          <br>
-          {% endfor %}
-        </ul>
-      </div>
+     <!-- Featured List -->
+    <h2 class= "banner-head"> Featured List</h2>
 
+    <div class="featured_list">
+      <div class="pure-g">
+        {% for i in range(length): %}
+            <div class="pure-u-1-3">
+                <img src = "{{cover_url[i]}}" alt="Book picture" height="300"><br>
+                <!-- <br><br> -->
+                {{featured_title[i]}}<br>
+                {{featured_author[i]}}<br><br>
+            </div>         
+        {% endfor %}
+      </div>
+    </div>
+    <!-- End of Featured List  -->
 
     <div class="footer l-box">
         <p>
