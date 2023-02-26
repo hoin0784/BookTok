@@ -12,8 +12,8 @@ def initialize():
   db.setup()
 
 # Just added basic routes
-@app.route('/',methods = ['GET','POST'] )
-def Home():
+@app.route('/', methods = ['GET','POST'] )
+def home():
 
    # Get the value of the form when the user clicked the button
   if request.method == 'POST':
@@ -59,11 +59,11 @@ def Home():
   else:
     
     # Requests NYT Bestseller 'combined print and ebook fiction' list (there's a lot of lists we can request)
-    requestUrl = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=Jn4QJ3QZomcadk6kUzr7GKmJubrMVB6y"
-    requestHeaders = {
+    request_url = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=Jn4QJ3QZomcadk6kUzr7GKmJubrMVB6y"
+    request_headers = {
       "Accept": "application/json"
     }
-    response = requests.get(requestUrl, headers=requestHeaders)
+    response = requests.get(request_url, headers=request_headers)
 
     # Turn json into a python dictionary
     response_dict = json.loads(response.text)
@@ -84,8 +84,8 @@ def Home():
 
     length = len(featured_title)
 
-  # Send featured list data to Home.html
-  return render_template('Home.html', length = length,
+  # Send featured list data to home.html
+  return render_template('home.html', length = length,
                                       cover_url = featured_cover, 
                                       featured_title = featured_title, 
                                       featured_author = featured_author)
