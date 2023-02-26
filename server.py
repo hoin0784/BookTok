@@ -158,7 +158,7 @@ def BookSearchList():
     url_BookTitle = BookTitle.replace(" ", "+")
     
     # Source from : openlibrary.org 
-    response = requests.get(f'http://openlibrary.org/search.json?title={url_BookTitle}&limit=10')
+    response = requests.get(f'http://openlibrary.org/search.json?title={url_BookTitle}&limit=15')
 
     # The response need to be convert to JSON format
     response = response.json()
@@ -182,11 +182,12 @@ def BookSearchList():
         book_title.append(results[i]['title'])
         author_name.append(results[i]['author_name'])
         # Since there are lots of isbn get the first one
+        print(results[i]['isbn'][0])
         isbn.append(results[i]['isbn'][0])
 
         count+=1
-      # else:
-      #   break
+      else:
+          break
 
     # Send the all data to the BookSearchList.html  
   return render_template('BookSearchList.html', count = count,
