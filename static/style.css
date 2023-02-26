@@ -47,7 +47,6 @@
    * vertically center the text.
    */
 
-
   .banner-head {
     text-align: center;
     margin-bottom: 50px;
@@ -82,6 +81,69 @@
     margin: 0 0.5em 2em;
     padding: 0 0 3em;
   }
+
+   /*
+   * -- GENRE TABLE BUTTONS  --
+   */
+
+   .genre-button {
+    border: none;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
+    display: inline-block;
+    height: 100px;
+    width: 155px;
+   }
+
+   #romance_button{
+    background-color: lightblue;
+   }
+
+   #thriller_button{
+    background-color: lavender;
+   }
+
+   #nonfiction_button{
+    background-color: lightseagreen;
+   }
+
+   #horror_button{
+    background-color: lightcoral;
+   }
+
+   #comedy_button{
+    background-color: lightskyblue;
+   }
+
+   #ya_button{
+    background-color: palevioletred;
+   }
+
+
+   #romance_button:hover{
+    background-color: rgb(142, 192, 209);
+   }
+
+   #thriller_button:hover{
+    background-color: rgb(184, 184, 222);
+   }
+
+   #nonfiction_button:hover{
+    background-color: rgb(20, 132, 126);
+   }
+
+   #horror_button:hover{
+    background-color: rgb(208, 98, 98);
+   }
+
+   #comedy_button:hover{
+    background-color: rgb(85, 143, 180);
+   }
+
+   #ya_button:hover{
+    background-color: rgb(171, 69, 103);
+   }
   
   /*
    * --GENRE TABLE INDIVIDUAL COLORS --
@@ -95,20 +157,14 @@
   }
 
   .genre-table-nf {
-    background-color: lightcoral;
+    background-color: white;
+    border: none;
   }
 
   .genre-table-horror {
     background-color: lightskyblue;
   }
 
-  .genre-table-ya {
-    background-color: lightgreen;
-  }
-
-  .genre-table-comedy {
-    background-color: lightsalmon;
-  }
   
   /*
    * -- GENRE TABLE HEADER --
@@ -125,25 +181,18 @@
   }
 
   
-  /*
-   * -- PRICING TABLE BUTTON --
-   * Styles for the "Choose" button at the bottom of a pricing table.
-   * This inherits from Pure Button.
-   */
-  .button-choose {
-    border: 1px solid #ccc;
-    background: #fff;
-    color: #333;
-    border-radius: 2em;
-    font-weight: bold;
-    position: relative;
-    bottom: -1.5em;
+  /* ACCOUNT PAGE */
+
+  .account_logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 7%;
   }
-  
-  .information-head {
-    color: black;
-    font-weight: 500;
+  .welcome{
+    text-align: center;
   }
+
   
   .footer {
     background: #111;
@@ -154,9 +203,6 @@
     color: #ddd;
   }
 
-  #genre_thriller:hover{  
-    background-color: aqua;
-  }
   
   /*
    * -- TABLET MEDIA QUERIES --
