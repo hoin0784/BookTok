@@ -147,7 +147,7 @@ def Comedy(title, author, length):
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def BookSearchList():
 
-  # This route method is almost 'POST' method (I guess ?)
+  # This route method is almost 'POST' method 
   if request.method == 'POST':
   
     # Get the user input from the form
@@ -158,7 +158,7 @@ def BookSearchList():
     url_BookTitle = BookTitle.replace(" ", "+")
     
     # Source from : openlibrary.org 
-    response = requests.get(f'http://openlibrary.org/search.json?title={url_BookTitle}&limit=15')
+    response = requests.get(f'http://openlibrary.org/search.json?title={url_BookTitle}&limit=20')
 
     # The response need to be convert to JSON format
     response = response.json()
@@ -171,23 +171,24 @@ def BookSearchList():
     isbn = []
     
     count = 0
+    # print("results length checking...")
+    # print(len(results))
+    # 15
 
     # Get the most recent books data from the results length (cover,title,author)
     # Loop untill the length of results
     for i in range(len(results)):
            
-      if 'title' in results[i] and 'author_name' in results[i] and 'cover_i' in results[i]:
-
-        cover_id.append(results[i]['cover_i'])
-        book_title.append(results[i]['title'])
-        author_name.append(results[i]['author_name'])
-        # Since there are lots of isbn get the first one
-        print(results[i]['isbn'][0])
-        isbn.append(results[i]['isbn'][0])
+      if 'title' in results[i] and 'author_name' in results[i] and 'isbn' in results[i]:
+        
+        book_title.append(results[i]['title'])  # 1
+        isbn.append(results[i]['isbn'][0])  
+        # cover_id.append(results[i]['cover_i']) 
+        author_name.append(results[i]['author_name'][0]) 
 
         count+=1
-      else:
-          break
+      # else:
+      #     break
 
     # Send the all data to the BookSearchList.html  
   return render_template('BookSearchList.html', count = count,
