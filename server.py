@@ -2,6 +2,7 @@ from flask import Flask , render_template,request, url_for, jsonify, json
 
 import requests
 import db
+import sys
 
 app = Flask(__name__)
 
@@ -11,33 +12,77 @@ def initialize():
   db.setup()
 
 # Just added basic routes
-@app.route('/')
+@app.route('/',methods = ['GET','POST'] )
 def Home():
-  # Requests NYT Bestseller 'combined print and ebook fiction' list (there's a lot of lists we can request)
-  requestUrl = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=Jn4QJ3QZomcadk6kUzr7GKmJubrMVB6y"
-  requestHeaders = {
-    "Accept": "application/json"
-  }
-  response = requests.get(requestUrl, headers=requestHeaders)
 
-  # Turn json into a python dictionary
-  response_dict = json.loads(response.text)
+   # Get the value of the form when the user clicked the button
+  if request.method == 'POST':
+    for key, value in request.form.items():
+      if key == 'Romance':
+        genres = key
+      elif key == 'Thriller':
+        genres = key
+      elif key == 'Nonfiction':
+        genres = key
+      elif key == 'Horror':
+        genres = key
+      elif key == 'Comedy':
+        genres = key
+      else:
+        genres = 'YoungAdult'
 
-  # Get only book list info from response_dict
-  book_dict = response_dict["results"]["books"]
+    request_url = f"https://openlibrary.org/subjects/{genres}.json"
+    request_headers = {
+        "Accept": "application/json"
+    }
+    response = requests.get(request_url, headers=request_headers)
+    response_dict = json.loads(response.text)
+    book_dict = response_dict["works"]
 
-  # Arrays that will hold featured list data (title, author, cover url)
-  featured_title = []
-  featured_author = []
-  featured_cover = []
+    title = []
+    author = []
 
-  # Get only necessary data for featured list from book_dict
-  for i in book_dict:
-    featured_title.append(i["title"])
-    featured_author.append(i["author"])
-    featured_cover.append(i["book_image"])    
+    for i in book_dict:
+      title.append(i["title"])
+      author.append(i["authors"][0]["name"])  # Get the author name
 
-  length = len(featured_title)
+    length = len(title)
+
+    try:
+      genres = getattr(sys.modules[__name__], genres)
+      return genres(title, author, length)
+      
+    except AttributeError:
+      pass
+
+  # If the method is ['GET] then just call NYT best seller
+  else:
+    
+    # Requests NYT Bestseller 'combined print and ebook fiction' list (there's a lot of lists we can request)
+    requestUrl = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=Jn4QJ3QZomcadk6kUzr7GKmJubrMVB6y"
+    requestHeaders = {
+      "Accept": "application/json"
+    }
+    response = requests.get(requestUrl, headers=requestHeaders)
+
+    # Turn json into a python dictionary
+    response_dict = json.loads(response.text)
+
+    # Get only book list info from response_dict
+    book_dict = response_dict["results"]["books"]
+
+    # Arrays that will hold featured list data (title, author, cover url)
+    featured_title = []
+    featured_author = []
+    featured_cover = []
+
+    # Get only necessary data for featured list from book_dict
+    for i in book_dict:
+      featured_title.append(i["title"])
+      featured_author.append(i["author"])
+      featured_cover.append(i["book_image"])    
+
+    length = len(featured_title)
 
   # Send featured list data to Home.html
   return render_template('Home.html', length = length,
@@ -58,76 +103,46 @@ def Account():
 def Genres():
   return render_template('genres.html')
 
-@app.route('/romance', methods = ['GET','POST'])
-def Romance():
+@app.route('/romance')
+def Romance(title, author, length):
+
+  return render_template('romance.html',length = length,
+                                        romance_title = title,
+                                        romance_author = author)
       
-  #Requests Open Library API for genres
-  request_url = "https://openlibrary.org/subjects/romance.json?"
-  request_headers = {
-    "Accept": "application/json"
-  }
-  response = requests.get(request_url, headers=request_headers)
-  response_dict = json.loads(response.text)
-  book_dict = response_dict["works"]
-
-  romance_title = []
-  romance_author = []
-  romance_genre = []
-  
-  for i in book_dict:
-    romance_title.append(i["title"])
-    romance_genre.append(i["subject"])
-    romance_author.append(i["authors"])
-    
-  length = len(romance_title)
-  
-  return render_template('romance.html', length = length, 
-                                         romance_title = romance_title, 
-                                         romance_genre = romance_genre,
-                                         romance_author = romance_author)
-
 @app.route('/thriller')
-def Thriller():
-  #Requests Open Library API for genres
-  request_url = "https://openlibrary.org/subjects/thriller.json?"
-  request_headers = {
-    "Accept": "application/json"
-  }
-  response = requests.get(request_url, headers=request_headers)
-  response_dict = json.loads(response.text)
-  book_dict = response_dict["works"]
-
-  thriller_title = []
-  thriller_author = []
-  thriller_genre = []
+def Thriller(title ,author,length): 
   
-  for i in book_dict:
-    thriller_title.append(i["title"])
-    thriller_genre.append(i["subject"])
-    thriller_author.append(i["authors"])
-    
-  length = len(thriller_title)
-  
-  return render_template('thriller.html', length = length, 
-                                         thriller_title = thriller_title, 
-                                         thriller_genre = thriller_genre,
-                                         thriller_author = thriller_author)
+  return render_template('thriller.html', length = length,
+                                          thriller_title = title,
+                                          thriller_author = author)
 
 @app.route('/nonfiction')
-def Nonfiction():
-  return render_template('nonfiction.html')
+def Nonfiction(title, author, length):
+  
+  return render_template('nonfiction.html', length = length,
+                                            non_fiction_title = title,
+                                            non_fiction_author = author)
 
 @app.route('/horror')
-def Horror():
-  return render_template('horror.html')
+def Horror(title, author, length):
+
+  return render_template('horror.html', length = length,
+                                        horror_title = title,
+                                        horror_author = author)
 
 @app.route('/ya')
-def YoungAdult():
-  return render_template('young_adult.html')
+def YoungAdult(title, author, length):
+
+  return render_template('young_adult.html',length = length,
+                                            young_adult_title = title,
+                                            young_adult_author = author)
 
 @app.route('/comedy')
-def Comedy():
-  return render_template('comedy.html')
+def Comedy(title, author, length):
+  return render_template('comedy.html' , length =length,
+                                         comedy_title = title,
+                                         comedy_author = author)
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def BookSearchList():

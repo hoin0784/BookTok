@@ -4,19 +4,22 @@
 {% block content %}
    <h1>Thriller</h1>
    <br>
+  
+  <div>
+    <ul>
+      {% for i in range(length): %}
+      <div>
+        <li><br>
+  
+          {{thriller_title[i]}}<br>
+          {{thriller_author[i]}}<br>
+        </li>
+      </div>
+      <br>
+      {% endfor %}
+    </ul>
+  </div>
+   
 
-   <div>
-      <ul>
-        {% for i in range(length): %}
-        <div>
-          <li><br>
-              {{thriller_title[i]}}<br>
-              {{thriller_author[i]}}<br>
-          </li>
-        </div>
-        <br>
-        {% endfor %}
-      </ul>
-    </div>
 
 {% endblock %}

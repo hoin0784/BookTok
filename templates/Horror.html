@@ -3,4 +3,20 @@
 
 {% block content %}
    <h1>Horror</h1>
+   <br>
+   
+   <div>
+      <ul>
+         {% for i in range(length): %}
+         <div>
+            <li><br>
+   
+               {{horror_title[i]}}<br>
+               {{horror_author[i]}}<br>
+            </li>
+         </div>
+         <br>
+         {% endfor %}
+      </ul>
+   </div>
 {% endblock %}
