@@ -9,6 +9,7 @@ psycopg2 = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 requests = "*"
+authlib = "*"
 
 [dev-packages]
 

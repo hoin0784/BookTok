@@ -3,4 +3,20 @@
 
 {% block content %}
    <h1>Nonfiction</h1>
+   <br>
+
+   <div>
+      <ul>
+         {% for i in range(length): %}
+         <div>
+            <li><br>
+   
+               {{non_fiction_title[i]}}<br>
+               {{non_fiction_author[i]}}<br>
+            </li>
+         </div>
+         <br>
+         {% endfor %}
+      </ul>
+   </div>
 {% endblock %}

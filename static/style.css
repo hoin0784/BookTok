@@ -1,6 +1,5 @@
 /*
  * -- BASE STYLES --
- * Most of these are inherited from Base, but I want to change a few.
  */
  body {
     color: #526066;
@@ -30,7 +29,6 @@
   
   /*
    * -- MENU STYLES --
-   * Make the menu have a very faint box-shadow.
    */
   .pure-menu {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -47,10 +45,9 @@
    * vertically center the text.
    */
 
-
   .banner-head {
     text-align: center;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
     font-size: 2em;
     color: Black;
     font-weight: 500;
@@ -73,42 +70,69 @@
     margin-bottom: 3.125em;
     text-align: center;
   }
-  
-  /*
-   * -- GENRE TABLE  --
+
+   /*
+   * -- GENRE TABLE BUTTONS  --
    */
-  .genre-table {
-    border: 1px solid #ddd;
-    margin: 0 0.5em 2em;
-    padding: 0 0 3em;
-  }
-  
-  /*
-   * --GENRE TABLE INDIVIDUAL COLORS --
-   */
-   .genre-table-romance{
+
+   .genre-button {
+    border: none;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    cursor: pointer;
+    display: inline-block;
+    height: 100px;
+    width: 155px;
+   }
+
+   #romance_button{
     background-color: lightblue;
    }
- 
-  .genre-table-thriller {
-    background-color: lightgray;
-  }
 
-  .genre-table-nf {
+   #thriller_button{
+    background-color: lavender;
+   }
+
+   #nonfiction_button{
+    background-color: lightseagreen;
+   }
+
+   #horror_button{
     background-color: lightcoral;
-  }
+   }
 
-  .genre-table-horror {
+   #comedy_button{
     background-color: lightskyblue;
-  }
+   }
 
-  .genre-table-ya {
-    background-color: lightgreen;
-  }
+   #ya_button{
+    background-color: palevioletred;
+   }
 
-  .genre-table-comedy {
-    background-color: lightsalmon;
-  }
+
+   #romance_button:hover{
+    background-color: rgb(115, 171, 190);
+   }
+
+   #thriller_button:hover{
+    background-color: rgb(184, 184, 222);
+   }
+
+   #nonfiction_button:hover{
+    background-color: rgb(20, 132, 126);
+   }
+
+   #horror_button:hover{
+    background-color: rgb(208, 98, 98);
+   }
+
+   #comedy_button:hover{
+    background-color: rgb(85, 143, 180);
+   }
+
+   #ya_button:hover{
+    background-color: rgb(171, 69, 103);
+   }
   
   /*
    * -- GENRE TABLE HEADER --
@@ -125,25 +149,19 @@
   }
 
   
-  /*
-   * -- PRICING TABLE BUTTON --
-   * Styles for the "Choose" button at the bottom of a pricing table.
-   * This inherits from Pure Button.
-   */
-  .button-choose {
-    border: 1px solid #ccc;
-    background: #fff;
-    color: #333;
-    border-radius: 2em;
-    font-weight: bold;
-    position: relative;
-    bottom: -1.5em;
+  /* ACCOUNT PAGE */
+
+  .account_logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 7%;
   }
-  
-  .information-head {
-    color: black;
-    font-weight: 500;
+  .welcome{
+    text-align: center;
   }
+
+  /* FOOTER */
   
   .footer {
     background: #111;
@@ -154,9 +172,6 @@
     color: #ddd;
   }
 
-  #genre_thriller:hover{  
-    background-color: aqua;
-  }
   
   /*
    * -- TABLET MEDIA QUERIES --
@@ -189,3 +204,15 @@
     position: absolute;
     right: 20px;
   }
+  
+/* FEATURED BOOKS LIST */
+.featured_list {
+  width: 70%;
+  font-size: medium;
+  text-align: center;
+  border-radius: 2em;
+  margin: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2em;
+}
