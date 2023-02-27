@@ -151,10 +151,6 @@ def home():
                                       session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
 
-@app.route('/bookshelf')
-def BookShelf():
-  return render_template('Bookshelf.html')
-
 @app.route('/account')
 def Account():
   return render_template('Account.html', session=session.get('user'))
