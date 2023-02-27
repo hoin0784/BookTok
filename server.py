@@ -265,7 +265,7 @@ def BookShelf():
   if request.method == 'GET':
     # after setting database, we should add code to bring user's bookshelf info
     # from database and show datas with GET request
-    return render_template('Bookshelf.html')
+    return render_template('Bookshelf.html', session=session.get('user'))
   
   else:
     # POST request = When user created new bookshelf
@@ -274,7 +274,8 @@ def BookShelf():
     bookshelfName = request.form.get('BookshelfName')
     # for now, only newly created bookshelf is shown
 
-    return render_template('Bookshelf.html', bookshelfName = bookshelfName)
+    return render_template('Bookshelf.html', bookshelfName = bookshelfName,
+                                             session=session.get('user'))
 
 
 if __name__ == '__main__':
