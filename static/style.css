@@ -148,6 +148,21 @@
     font-weight: normal;
   }
 
+
+  /* GENRE PAGES */
+
+  .genre_lists {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);  
+    width: 70%;
+    font-size: medium;
+    text-align: center;
+    border-radius: 2em;
+    margin: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2em;
+  }
   
   /* ACCOUNT PAGE */
 
