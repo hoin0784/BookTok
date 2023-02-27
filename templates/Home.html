@@ -86,6 +86,19 @@
     </div>
     <!-- End of Featured List  -->
 
+    <!-- auth debugging -->
+
+    {% if session %}
+        <h1>Welcome {{session.userinfo.name}}!</h1>
+        <p><a href="/logout">Logout</a></p>
+        <div><pre>{{pretty}}</pre></div>
+    {% else %}
+        <h1>Welcome Guest</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+
+    <!-- end of auth -->
+
     <div class="footer l-box">
         <p>Project 1 - CSCI 5117 - Fall 2023</p>
     </div>
