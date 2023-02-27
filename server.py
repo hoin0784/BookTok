@@ -150,54 +150,65 @@ def home():
                                       featured_author = featured_author,
                                       session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
+
+@app.route('/bookshelf')
+def BookShelf():
+  return render_template('Bookshelf.html')
+
 @app.route('/account')
 def Account():
-  return render_template('Account.html')
+  return render_template('Account.html', session=session.get('user'))
 
 @app.route('/genres')
 def Genres():
-  return render_template('genres.html')
+  return render_template('genres.html', session=session.get('user'))
 
 @app.route('/romance')
 def Romance(title, author, length):
 
   return render_template('romance.html',length = length,
                                         romance_title = title,
-                                        romance_author = author)
+                                        romance_author = author,
+                                        session=session.get('user'))
       
 @app.route('/thriller')
 def Thriller(title ,author,length): 
   
   return render_template('thriller.html', length = length,
                                           thriller_title = title,
-                                          thriller_author = author)
+                                          thriller_author = author,
+                                          session=session.get('user'))
 
 @app.route('/nonfiction')
 def Nonfiction(title, author, length):
   
   return render_template('nonfiction.html', length = length,
                                             non_fiction_title = title,
-                                            non_fiction_author = author)
+                                            non_fiction_author = author,
+                                            session=session.get('user'))
 
 @app.route('/horror')
 def Horror(title, author, length):
 
   return render_template('horror.html', length = length,
                                         horror_title = title,
-                                        horror_author = author)
+                                        horror_author = author,
+                                        session=session.get('user'))
 
 @app.route('/ya')
 def YoungAdult(title, author, length):
 
   return render_template('young_adult.html',length = length,
                                             young_adult_title = title,
-                                            young_adult_author = author)
+                                            young_adult_author = author,
+                                            session=session.get('user'))
 
 @app.route('/comedy')
 def Comedy(title, author, length):
   return render_template('comedy.html' , length =length,
                                          comedy_title = title,
-                                         comedy_author = author)
+                                         comedy_author = author,
+                                         session=session.get('user'))
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def BookSearchList():
@@ -250,7 +261,8 @@ def BookSearchList():
                                                 isbn = isbn,
                                                 cover_id = cover_id, 
                                                 book_title = book_title, 
-                                                author_name = author_name)
+                                                author_name = author_name,
+                                                session=session.get('user'))
 
 @app.route('/bookshelf', methods = ['GET','POST'])
 def BookShelf():

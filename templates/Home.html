@@ -86,18 +86,12 @@
     </div>
     <!-- End of Featured List  -->
 
-    <!-- auth debugging -->
-
+    <!-- auth debugging - delete later -->
     {% if session %}
-        <h1>Welcome {{session.userinfo.name}}!</h1>
-        <p><a href="/logout">Logout</a></p>
+        <p>json from auth: </p>
         <div><pre>{{pretty}}</pre></div>
-    {% else %}
-        <h1>Welcome Guest</h1>
-        <p><a href="/login">Login</a></p>
     {% endif %}
-
-    <!-- end of auth -->
+    <!-- ============ -->
 
     <div class="footer l-box">
         <p>Project 1 - CSCI 5117 - Spring 2023</p>
