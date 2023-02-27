@@ -184,4 +184,8 @@
       font-size: 2em;
     }
   }
-  
+
+  .add-shelf{
+    position: absolute;
+    right: 20px;
+  }

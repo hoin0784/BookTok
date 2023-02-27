@@ -11,6 +11,30 @@
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // code reference: Stackoverflow https://stackoverflow.com/questions/14643617/create-table-using-javascript
+        function createShelf() {
+            const body = document.body, tbl = document.createElement('table');
+
+            for (let i = 0; i < 4; i++) {
+                const tr = tbl.insertRow();
+                for (let j = 0; j < 1; j++) {
+                    if (i === 1 && j === 1) {
+                        break;
+                    } 
+                    else {
+                        const td = tr.insertCell();
+                        td.appendChild(document.createTextNode(`Add a book`));
+                        td.style.border = '1px solid black';
+                        if (i === 1 && j === 1) {
+                        td.setAttribute('rowSpan', '2');
+                        }
+                    }
+                }
+            }
+            body.appendChild(tbl);
+        };
+    </script>
 </head>
 
 <body>
@@ -18,12 +42,13 @@
     <br>
     <br><br><br>
 
-    <h2 class= "banner-head"> Bookshelf </h2>
+    <h2 class= "banner-head"> Bookshelf</h2>
     <p>
-        <button class="pure-button">
-            <i class="fa-solid fa-plus"></i>Add new bookshelf
+        <button class="pure-button add-shelf" onclick="createShelf()">
+            <i class="fa-solid fa-plus"></i> Create new bookshelf
         </button>
-        <!-- <table class="pure-table pure-table-horizontal">
+
+        <table class="pure-table pure-table-horizontal" id="bookshelf">
             <thead>
                 SHELF NAME
             </thead>
@@ -41,7 +66,7 @@
                     <td>The light we carry</td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
     </p>
 
 </body>
