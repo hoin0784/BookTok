@@ -1,15 +1,73 @@
-from flask import Flask , render_template,request, url_for, jsonify, json
+from flask import Flask, render_template,request, url_for, jsonify, json, redirect, session
 
 import requests
 import db
 import sys
 
+# auth imports
+from os import environ as env
+from urllib.parse import quote_plus, urlencode
+
+from authlib.integrations.flask_client import OAuth
+from dotenv import find_dotenv, load_dotenv
+
+# Load .env file
+ENV_FILE = find_dotenv()
+if ENV_FILE:
+    load_dotenv(ENV_FILE)
+
+
 app = Flask(__name__)
+app.secret_key = env.get("APP_SECRET_KEY")
 
 # Operates when accessing the URL for the first time
 @app.before_first_request
 def initialize():
   db.setup()
+
+
+# ======== Auth Stuff ===========
+oauth = OAuth(app)
+
+oauth.register(
+    "auth0",
+    client_id=env.get("AUTH0_CLIENT_ID"),
+    client_secret=env.get("AUTH0_CLIENT_SECRET"),
+    client_kwargs={
+        "scope": "openid profile email",
+    },
+    server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration'
+)
+
+@app.route("/login")
+def login():
+    return oauth.auth0.authorize_redirect(
+        redirect_uri=url_for("callback", _external=True)
+    )
+
+@app.route("/callback", methods=["GET", "POST"])
+def callback():
+    token = oauth.auth0.authorize_access_token()
+    session["user"] = token
+    return redirect("/")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(
+        "https://" + env.get("AUTH0_DOMAIN")
+        + "/v2/logout?"
+        + urlencode(
+            {
+                "returnTo": url_for("home", _external=True),
+                "client_id": env.get("AUTH0_CLIENT_ID"),
+            },
+            quote_via=quote_plus,
+        )
+    )
+
+# ===== End of Auth Stuff ========
+
 
 # Just added basic routes
 @app.route('/', methods = ['GET','POST'] )
@@ -85,10 +143,12 @@ def home():
     length = len(featured_title)
 
   # Send featured list data to home.html
+  # json.dump is just for debugging can be deleted later
   return render_template('home.html', length = length,
                                       cover_url = featured_cover, 
                                       featured_title = featured_title, 
-                                      featured_author = featured_author)
+                                      featured_author = featured_author,
+                                      session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
 
 @app.route('/bookshelf')
