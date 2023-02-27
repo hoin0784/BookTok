@@ -150,11 +150,6 @@ def home():
                                       featured_author = featured_author,
                                       session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
-
-@app.route('/bookshelf')
-def BookShelf():
-  return render_template('Bookshelf.html')
-
 @app.route('/account')
 def Account():
   return render_template('Account.html')
@@ -256,6 +251,23 @@ def BookSearchList():
                                                 cover_id = cover_id, 
                                                 book_title = book_title, 
                                                 author_name = author_name)
+
+@app.route('/bookshelf', methods = ['GET','POST'])
+def BookShelf():
+  if request.method == 'GET':
+    # after setting database, we should add code to bring user's bookshelf info
+    # from database and show datas with GET request
+    return render_template('Bookshelf.html')
+  
+  else:
+    # POST request = When user created new bookshelf
+
+    # Get new bookshelf name
+    bookshelfName = request.form.get('BookshelfName')
+    # for now, only newly created bookshelf is shown
+
+    return render_template('Bookshelf.html', bookshelfName = bookshelfName)
+
 
 if __name__ == '__main__':
 

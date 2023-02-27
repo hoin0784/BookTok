@@ -11,30 +11,7 @@
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // code reference: Stackoverflow https://stackoverflow.com/questions/14643617/create-table-using-javascript
-        function createShelf() {
-            const body = document.body, tbl = document.createElement('table');
-
-            for (let i = 0; i < 4; i++) {
-                const tr = tbl.insertRow();
-                for (let j = 0; j < 1; j++) {
-                    if (i === 1 && j === 1) {
-                        break;
-                    } 
-                    else {
-                        const td = tr.insertCell();
-                        td.appendChild(document.createTextNode(`Add a book`));
-                        td.style.border = '1px solid black';
-                        if (i === 1 && j === 1) {
-                        td.setAttribute('rowSpan', '2');
-                        }
-                    }
-                }
-            }
-            body.appendChild(tbl);
-        };
-    </script>
+    <script async defer src="/static/functions.js"></script>
 </head>
 
 <body>
@@ -44,26 +21,38 @@
 
     <h2 class= "banner-head"> Bookshelf</h2>
     <p>
-        <button class="pure-button add-shelf" onclick="createShelf()">
-            <i class="fa-solid fa-plus"></i> Create new bookshelf
-        </button>
+        <div class="pure-button add-shelf popup">
+            <i class="fa-solid fa-plus" onclick="newShelfForm()"> Create new bookshelf</i>
+            <div class="popuptext" id="popupBox">
+                <form class="pure-form" method="post">
+                    <input type="text" name = "BookshelfName" class="pure-input searchBox" placeholder="New bookshelf name" required="" />
+                    <br>
+                    <button type="submit" class="pure-button create-shelf-button">
+                        Save
+                    </button>
+                    <button class="pure-button create-shelf-button" onclick="closePopup()">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <table class="pure-table pure-table-horizontal" id="bookshelf">
             <thead>
-                SHELF NAME
+                {{bookshelfName}}
             </thead>
             <tbody>
                 <tr>
-                    <td>It starts with us</td>
+                    <td>book name</td>
                 </tr>
                 <tr>
-                    <td>Spare</td>
+                    <td>book name</td>
                 </tr>
                 <tr>
-                    <td>Lessosns in Chemistry</td>
+                    <td>book name</td>
                 </tr>
                 <tr>
-                    <td>The light we carry</td>
+                    <td>book name</td>
                 </tr>
             </tbody>
         </table>
