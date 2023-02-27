@@ -1,6 +1,5 @@
 /*
  * -- BASE STYLES --
- * Most of these are inherited from Base, but I want to change a few.
  */
  body {
     color: #526066;
@@ -30,7 +29,6 @@
   
   /*
    * -- MENU STYLES --
-   * Make the menu have a very faint box-shadow.
    */
   .pure-menu {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -71,15 +69,6 @@
     grid-template-rows: repeat(2, 1fr);  
     margin-bottom: 3.125em;
     text-align: center;
-  }
-  
-  /*
-   * -- GENRE TABLE  --
-   */
-  .genre-table {
-    border: 1px solid #ddd;
-    margin: 0 0.5em 2em;
-    padding: 0 0 3em;
   }
 
    /*
@@ -122,7 +111,7 @@
 
 
    #romance_button:hover{
-    background-color: rgb(142, 192, 209);
+    background-color: rgb(115, 171, 190);
    }
 
    #thriller_button:hover{
@@ -144,27 +133,6 @@
    #ya_button:hover{
     background-color: rgb(171, 69, 103);
    }
-  
-  /*
-   * --GENRE TABLE INDIVIDUAL COLORS --
-   */
-   .genre-table-romance{
-    background-color: lightblue;
-   }
- 
-  .genre-table-thriller {
-    background-color: lightgray;
-  }
-
-  .genre-table-nf {
-    background-color: white;
-    border: none;
-  }
-
-  .genre-table-horror {
-    background-color: lightskyblue;
-  }
-
   
   /*
    * -- GENRE TABLE HEADER --
@@ -193,6 +161,7 @@
     text-align: center;
   }
 
+  /* FOOTER */
   
   .footer {
     background: #111;
