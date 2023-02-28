@@ -1,3 +1,26 @@
+<!-- This Navi.html is Base template ! -->
+<!-- Make sure that put the curly bracket {} and % before and after words 
+     such as (extend, block content, endblock and etc....).
+    
+     Curly braces in comments are not explicitly mentioned in the example below because,
+     they are recognized as templates and cause an error.
+    -->
+
+<!-- If you want to inherit from this base template then, use 
+     extend "Navi.html" -->
+
+<!-- If you want to write some link or styles in your child template then, use 
+     block head  
+        ...put the link or script here ! ...
+        ...but please check the duplicated link or script from base template...  
+     endblock -->
+
+<!-- if you want to write some codes in the <body> tag from child template then, use
+    block content 
+        ...write code !...
+     endblock     
+-->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,7 +37,10 @@
         {% block head %}
         
         {% endblock %}
-        <title> {% block title %} {% endblock %}</title>
+        
+        <title> 
+            {% block title %} {% endblock %}
+        </title>
                 
     </head>
     <body>
