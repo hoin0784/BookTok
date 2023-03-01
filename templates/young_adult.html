@@ -18,9 +18,10 @@
    <div class = "pure-g">
    {% for i in range(length): %}
    <div class ="pure-u-1 pure-u-md-1-3">
-   <img src = "static/placeholderbook.svg" alt="Book picture" height="300"><br>
+   <img src = "{{book_thumbnails[i]}}" alt="Book picture" height="300"><br>
       {{young_adult_title[i]}}<br>
-      {{young_adult_author[i]}}<br>
+      {{author_names[i]}}<br>
+      {{book_published_dates[i]}}
    </div>
    {% endfor %}
    </div>

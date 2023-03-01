@@ -16,11 +16,12 @@
    <h2 class= "banner-head"> Nonfiction</h2>
    <div class = "genre_lists">
       <div class = "pure-g">
-      {% for i in range(length): %}
+      {% for i in range(items_length): %}
       <div class ="pure-u-1 pure-u-md-1-3">
-      <img src = "static/placeholderbook.svg" alt="Book picture" height="300"><br>
-         {{non_fiction_title[i]}}<br>
-         {{non_fiction_author[i]}}<br>
+      <img src = "{{book_thumbnails[i]}}" alt="Book picture" height="300"><br>
+         {{nonfiction_title[i]}}<br>
+         {{author_names[i]}}<br>
+         {{book_published_dates[i]}}
       </div>
       {% endfor %}
       </div>

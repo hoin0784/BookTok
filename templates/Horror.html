@@ -12,16 +12,17 @@
 
    <br>
    <br><br>
-<h2 class= "banner-head"> Horror</h2>
-<div class = "genre_lists">
-<div class = "pure-g">
-  {% for i in range(length): %}
-  <div class ="pure-u-1 pure-u-md-1-3">
-   <img src = "static/placeholderbook.svg" alt="Book picture" height="300"><br>
-        {{horror_title[i]}}<br>
-        {{horror_author[i]}}<br>
-  </div>
-  {% endfor %}
- </div>
-</div>
-{% endblock %}
+   <h2 class="banner-head"> Nonfiction</h2>
+   <div class="genre_lists">
+      <div class="pure-g">
+         {% for i in range(items_length): %}
+         <div class="pure-u-1 pure-u-md-1-3">
+            <img src="{{book_thumbnails[i]}}" alt="Book picture" height="300"><br>
+            {{horror_title[i]}}<br>
+            {{author_names[i]}}<br>
+            {{book_published_dates[i]}}
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+   {% endblock %}
