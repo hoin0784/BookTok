@@ -46,6 +46,7 @@
    */
 
   .banner-head {
+
     text-align: center;
     margin-bottom: 50px;
     font-size: 2em;
@@ -69,6 +70,8 @@
     grid-template-rows: repeat(2, 1fr);  
     margin-bottom: 3.125em;
     text-align: center;
+    place-items: center;
+    padding-right: 4em;
   }
 
    /*
@@ -83,6 +86,8 @@
     display: inline-block;
     height: 100px;
     width: 155px;
+    
+    
    }
 
    #romance_button{
@@ -215,11 +220,7 @@
     }
   }
 
-  .add-shelf{
-    position: absolute;
-    right: 20px;
-  }
-  
+
 /* FEATURED BOOKS LIST */
 .featured_list {
   width: 70%;
@@ -231,3 +232,73 @@
   margin-right: auto;
   padding: 2em;
 }
+
+
+/* BOOK SHELF */
+.add-shelf{
+  position: absolute;
+  right: 20px;
+}
+
+.create-shelf-button{
+  font-size: 40px;
+}
+
+
+/* Code reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup */
+  .popup {
+    margin-right: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* The actual popup */
+  .popup .popuptext {
+    display: none;
+    /* visibility: hidden; */
+    width: 300px;
+    background-color: #99c3f1;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    top: 140%;
+    left: 50%;
+    margin-left: -180px;
+  }
+
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #99c3f1 transparent transparent transparent;
+    transform: rotate(180deg);
+  }
+
+  /* Toggle this class - hide and show the popup */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }

@@ -3,6 +3,7 @@ from flask import Flask, render_template,request, url_for, jsonify, json, redire
 import requests
 import db
 import sys
+import os
 
 # auth imports
 from os import environ as env
@@ -15,6 +16,9 @@ from dotenv import find_dotenv, load_dotenv
 ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
+
+ # Get the key from .env
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 
 app = Flask(__name__)
@@ -88,27 +92,30 @@ def home():
         genres = key
       else:
         genres = 'YoungAdult'
+    
+    
+    request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&key={GOOGLE_API_KEY}'
+    response = requests.get(request_url).json()
+    items_length = len(response['items'])
+    book_title = []
+    author_names = []
+    book_thumbnails = []
+    book_published_dates = []
 
-    request_url = f"https://openlibrary.org/subjects/{genres}.json"
-    request_headers = {
-        "Accept": "application/json"
-    }
-    response = requests.get(request_url, headers=request_headers)
-    response_dict = json.loads(response.text)
-    book_dict = response_dict["works"]
-
-    title = []
-    author = []
-
-    for i in book_dict:
-      title.append(i["title"])
-      author.append(i["authors"][0]["name"])  # Get the author name
-
-    length = len(title)
+    for i in range(items_length):
+      book_title.append(response['items'][i]['volumeInfo']['title'])
+      author_names.append(response['items'][i]['volumeInfo']['authors'][0])
+      book_published_dates.append(response['items'][i]['volumeInfo']['publishedDate'])
+    # check if imageLinks is defined before appending to book_thumbnails
+      if 'imageLinks' in response['items'][i]['volumeInfo']:
+          book_thumbnails.append(response['items'][i]['volumeInfo']['imageLinks']['thumbnail'])
+      else:
+          book_thumbnails.append(None)
 
     try:
       genres = getattr(sys.modules[__name__], genres)
-      return genres(title, author, length)
+      
+      return genres(book_title, author_names, book_thumbnails, book_published_dates, items_length)
       
     except AttributeError:
       pass
@@ -148,67 +155,76 @@ def home():
                                       cover_url = featured_cover, 
                                       featured_title = featured_title, 
                                       featured_author = featured_author,
-                                      session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
+                                      session = session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
-
-@app.route('/bookshelf')
-def BookShelf():
-  return render_template('Bookshelf.html', session=session.get('user'))
 
 @app.route('/account')
 def Account():
-  return render_template('Account.html', session=session.get('user'))
+  return render_template('Account.html', session = session.get('user'))
 
 @app.route('/genres')
 def Genres():
-  return render_template('genres.html', session=session.get('user'))
+  return render_template('genres.html', session = session.get('user'))
 
 @app.route('/romance')
-def Romance(title, author, length):
+def Romance(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
-  return render_template('romance.html',length = length,
-                                        romance_title = title,
-                                        romance_author = author,
-                                        session=session.get('user'))
+  return render_template('romance.html',romance_title = book_title,
+                                        author_names = author_names,
+                                        book_thumbnails = book_thumbnails,
+                                        book_published_dates = book_published_dates,
+                                        items_length = items_length,
+                                        session = session.get('user'))
       
 @app.route('/thriller')
-def Thriller(title ,author,length): 
+def Thriller(book_title, author_names, book_thumbnails, book_published_dates, items_length):
   
-  return render_template('thriller.html', length = length,
-                                          thriller_title = title,
-                                          thriller_author = author,
-                                          session=session.get('user'))
+  return render_template('thriller.html', thriller_title = book_title,
+                                          author_names = author_names,
+                                          book_thumbnails = book_thumbnails,
+                                          book_published_dates = book_published_dates,
+                                          items_length = items_length,
+                                          session = session.get('user'))
 
 @app.route('/nonfiction')
-def Nonfiction(title, author, length):
+def Nonfiction(book_title, author_names, book_thumbnails, book_published_dates, items_length):
   
-  return render_template('nonfiction.html', length = length,
-                                            non_fiction_title = title,
-                                            non_fiction_author = author,
-                                            session=session.get('user'))
+  return render_template('nonfiction.html', nonfiction_title = book_title,
+                                            author_names = author_names,
+                                            book_thumbnails = book_thumbnails,
+                                            book_published_dates = book_published_dates,
+                                            items_length = items_length,
+                                            session = session.get('user'))
 
 @app.route('/horror')
-def Horror(title, author, length):
+def Horror(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
-  return render_template('horror.html', length = length,
-                                        horror_title = title,
-                                        horror_author = author,
+  return render_template('horror.html', horror_title = book_title,
+                                        author_names = author_names,
+                                        book_thumbnails = book_thumbnails,
+                                        book_published_dates = book_published_dates,
+                                        items_length = items_length,
                                         session=session.get('user'))
 
 @app.route('/ya')
-def YoungAdult(title, author, length):
+def YoungAdult(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
-  return render_template('young_adult.html',length = length,
-                                            young_adult_title = title,
-                                            young_adult_author = author,
-                                            session=session.get('user'))
+  return render_template('young_adult.html',  young_adult_title = book_title,
+                                              author_names = author_names,
+                                              book_thumbnails = book_thumbnails,
+                                              book_published_dates = book_published_dates,
+                                              items_length = items_length,
+                                              session = session.get('user'))
 
 @app.route('/comedy')
-def Comedy(title, author, length):
-  return render_template('comedy.html' , length =length,
-                                         comedy_title = title,
-                                         comedy_author = author,
-                                         session=session.get('user'))
+def Comedy(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+
+  return render_template('comedy.html', comedy_title = book_title,
+                                        author_names = author_names,
+                                        book_thumbnails = book_thumbnails,
+                                        book_published_dates = book_published_dates,
+                                        items_length = items_length,
+                                        session = session.get('user'))
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def BookSearchList():
@@ -222,47 +238,52 @@ def BookSearchList():
     # Changed URL format for fetching ..
     # (ex: Harry potter -> Harry+potter)
     url_BookTitle = BookTitle.replace(" ", "+")
-    
-    # Source from : openlibrary.org 
-    response = requests.get(f'http://openlibrary.org/search.json?title={url_BookTitle}&limit=20')
 
-    # The response need to be convert to JSON format
-    response = response.json()
-    results = response['docs']
+    # This is already defaulted 10 (from Google Books Api), so we do not need to set max.
+    # I have set the global variable GOOGLE_API_KEY from line 21. 
 
-    # Set the array of the lists that I want to get
-    book_title = []
-    author_name = []
-    cover_id = []
-    isbn = []
-    
-    count = 0
-    # print("results length checking...")
-    # print(len(results))
-    # 15
+    url = f'https://www.googleapis.com/books/v1/volumes?q={url_BookTitle}&key={GOOGLE_API_KEY}'
+    response = requests.get(url).json()
+    items_length = len(response['items'])
 
-    # Get the most recent books data from the results length (cover,title,author)
-    # Loop untill the length of results
-    for i in range(len(results)):
-           
-      if 'title' in results[i] and 'author_name' in results[i] and 'isbn' in results[i]:
-        
-        book_title.append(results[i]['title'])  # 1
-        isbn.append(results[i]['isbn'][0])  
-        # cover_id.append(results[i]['cover_i']) 
-        author_name.append(results[i]['author_name'][0]) 
+    book_title =[]
+    author_names = []
+    book_thumbnails = []
+    book_published_dates =[]
+  
+    # Get the data from the json (title, authors, thumbnail,publishedDate)
+    for i in range(items_length):
+  
+      book_title.append(response['items'][i]['volumeInfo']['title'])
+      author_names.append(response['items'][i]['volumeInfo']['authors'][0])
+      book_thumbnails.append(response['items'][i]['volumeInfo']['imageLinks']['thumbnail'])
+      book_published_dates.append(response['items'][i]['volumeInfo']['publishedDate'])
 
-        count+=1
-      # else:
-      #     break
+     
+  return render_template('BookSearchList.html', items_length = items_length,
+                                                book_title = book_title,
+                                                author_names = author_names,
+                                                book_thumbnails = book_thumbnails,
+                                                book_published_dates = book_published_dates,
+                                                session = session.get('user'))
 
-    # Send the all data to the BookSearchList.html  
-  return render_template('BookSearchList.html', count = count,
-                                                isbn = isbn,
-                                                cover_id = cover_id, 
-                                                book_title = book_title, 
-                                                author_name = author_name,
-                                                session=session.get('user'))
+@app.route('/bookshelf', methods = ['GET','POST'])
+def BookShelf():
+  if request.method == 'GET':
+    # after setting database, we should add code to bring user's bookshelf info
+    # from database and show datas with GET request
+    return render_template('Bookshelf.html', session=session.get('user'))
+  
+  else:
+    # POST request = When user created new bookshelf
+
+    # Get new bookshelf name
+    bookshelfName = request.form.get('BookshelfName')
+    # for now, only newly created bookshelf is shown
+
+    return render_template('Bookshelf.html', bookshelfName = bookshelfName,
+                                             session=session.get('user'))
+
 
 if __name__ == '__main__':
 
