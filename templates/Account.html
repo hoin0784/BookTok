@@ -19,7 +19,7 @@
 
     <img class ="account_logo" src= "static/Account.svg">
     {% if session %}
-            <h3 class = "welcome"> Welcome {{session.userinfo.name}}!</h3>
+        <h3 class = "welcome"> Welcome {{session.userinfo.name}}!</h3>
     {% else %}
         <h3 class = "welcome">Login to access account settings.</h3>
     {% endif %}

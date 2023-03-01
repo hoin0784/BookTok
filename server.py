@@ -20,6 +20,9 @@ if ENV_FILE:
  # Get the key from .env
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
+# Get NYT api key from .env
+NYT_API_KEY = os.environ['NYT_API_KEY']
+
 
 app = Flask(__name__)
 app.secret_key = env.get("APP_SECRET_KEY")
@@ -124,7 +127,7 @@ def home():
   else:
     
     # Requests NYT Bestseller 'combined print and ebook fiction' list (there's a lot of lists we can request)
-    request_url = "https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key=Jn4QJ3QZomcadk6kUzr7GKmJubrMVB6y"
+    request_url = f"https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key={NYT_API_KEY}"
     request_headers = {
       "Accept": "application/json"
     }
