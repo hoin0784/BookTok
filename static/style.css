@@ -180,6 +180,15 @@
   .welcome{
     text-align: center;
   }
+  
+/* profile picture */
+  .profile_pic{ 
+    display: block;
+    border: #165178;
+    text-decoration: underline;
+    font-family: sans-serif;
+    text-align: center;
+  }
 
   /* FOOTER */
   
