@@ -57,7 +57,6 @@ label {
 }
 
 .pure-form input[type] {
-    border: 2px solid #ddd;
     box-shadow: none;
     font-size: 100%;
     width: 100%;
@@ -89,10 +88,6 @@ a.pure-button-primary {
  */
 
 .home-menu {
-    /* text-align: center; */
-    box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
-}
-.home-menu {
     background: #ffffff;
 }
 .pure-menu.pure-menu-fixed {
@@ -118,24 +113,16 @@ a.pure-button-primary {
 }
 
 .home-menu a {
-    font-size: 20px;
+    font-size: 23px;
     color: #2493dd;
+    text-decoration: underline;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
-    background: none;
-    border: none;
+    text-decoration: underline;
     color: #165178;
 }
 
-
-/* This is the class used for the footer */
-/* .footer {
-    background: #111;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-} */
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --

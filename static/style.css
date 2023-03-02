@@ -110,7 +110,7 @@
     background-color: lightskyblue;
    }
 
-   #ya_button{
+   #children_button{
     background-color: palevioletred;
    }
 
@@ -135,7 +135,7 @@
     background-color: rgb(85, 143, 180);
    }
 
-   #ya_button:hover{
+   #children_button:hover{
     background-color: rgb(171, 69, 103);
    }
   

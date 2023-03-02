@@ -94,7 +94,7 @@ def home():
       elif key == 'Comedy':
         genres = key
       else:
-        genres = 'YoungAdult'
+        genres = 'Children'
     
     
     request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&key={GOOGLE_API_KEY}'
@@ -150,14 +150,14 @@ def home():
       featured_author.append(i["author"])
       featured_cover.append(i["book_image"])    
 
-    length = len(featured_title)
+      length = len(featured_title)
 
   # Send featured list data to home.html
   # json.dump is just for debugging can be deleted later
-  return render_template('home.html', length = length,
-                                      cover_url = featured_cover, 
+  return render_template('home.html', cover_url = featured_cover, 
                                       featured_title = featured_title, 
                                       featured_author = featured_author,
+                                      length = length,
                                       session = session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
 
@@ -165,9 +165,9 @@ def home():
 def Account():
   return render_template('Account.html', session = session.get('user'))
 
-@app.route('/genres')
-def Genres():
-  return render_template('genres.html', session = session.get('user'))
+# @app.route('/genres')
+# def Genres():
+#   return render_template('genres.html', session = session.get('user'))
 
 @app.route('/romance')
 def Romance(book_title, author_names, book_thumbnails, book_published_dates, items_length):
@@ -209,10 +209,10 @@ def Horror(book_title, author_names, book_thumbnails, book_published_dates, item
                                         items_length = items_length,
                                         session=session.get('user'))
 
-@app.route('/ya')
-def YoungAdult(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+@app.route('/childrens')
+def Children(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
-  return render_template('young_adult.html',  young_adult_title = book_title,
+  return render_template('childrens.html',  children_title = book_title,
                                               author_names = author_names,
                                               book_thumbnails = book_thumbnails,
                                               book_published_dates = book_published_dates,
