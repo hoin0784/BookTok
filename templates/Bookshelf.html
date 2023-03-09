@@ -35,20 +35,20 @@
         </div>
     </div>
 
-    {% for bookshelf in bookshelves %}
+    {% for i in range(bookshelves|length) %}
         <table class="pure-table pure-table-horizontal" id="bookshelf">
             <thead>
-                {{bookshelf[0]}}
+                {{bookshelves[i][0]}}
             </thead>
-            {% endfor %}
             <tbody>
-                {% for book in books %}
+                {% for book in books[i] %}
                     <tr>
-                        <td>{{book}}</td>
+                        <td>{{book[0]}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+    {% endfor %}
 
 </p>
 
