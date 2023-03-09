@@ -17,7 +17,7 @@ ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
- # Get the key from .env
+# Get the key from .env
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
 # Get NYT api key from .env
@@ -273,18 +273,36 @@ def BookSearchList():
 @app.route('/bookshelf', methods = ['GET','POST'])
 def BookShelf():
   if request.method == 'GET':
-    # after setting database, we should add code to bring user's bookshelf info
-    # from database and show datas with GET request
-    return render_template('Bookshelf.html', session=session.get('user'))
+    # Get user's email address
+    userSession = session.get('user')
+    userInfo = userSession['userinfo']
+    userEmail = userInfo['email']
+
+    with db.get_db_cursor(True) as cur:
+        cur.execute("SELECT bookshelfname FROM userinfo WHERE useremail = %s;", (userEmail,))
+        rows = cur.fetchall()
+        bookshelves = []
+        for row in rows:
+          bookshelves.append(row)
+        
+        books = []
+        for bookshelf in bookshelves:
+          cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = ANY(%s);", (userEmail, bookshelf,))
+          temp = [row for row in cur.fetchall()]
+          books.append(temp)
+
+    return render_template('Bookshelf.html', session=session.get('user'),
+                                             bookshelves=bookshelves,
+                                             books=books)
   
   else:
     # POST request = When user created new bookshelf
 
     # Get new bookshelf name
-    bookshelfName = request.form.get('BookshelfName')
+    bookshelves = request.form.get('BookshelfName')
     # for now, only newly created bookshelf is shown
 
-    return render_template('Bookshelf.html', bookshelfName = bookshelfName,
+    return render_template('Bookshelf.html', dict = bookshelves,
                                              session=session.get('user'))
 
 
