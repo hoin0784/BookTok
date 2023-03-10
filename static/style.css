@@ -253,6 +253,15 @@
   font-size: 40px;
 }
 
+.bookshelf-login{ 
+  background: rgb(131, 219, 246);
+  color: white;
+  margin: auto;
+  border-radius: 4px;
+  width: 130px;
+  text-align: center;
+}
+
 
 /* Code reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup */
   .popup {
