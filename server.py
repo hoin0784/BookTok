@@ -272,19 +272,22 @@ def BookSearchList():
 
 @app.route('/bookshelf', methods = ['GET','POST'])
 def BookShelf():
-  if request.method == 'GET':
-    # Get user's email address
-    userSession = session.get('user')
-    userInfo = userSession['userinfo']
-    userEmail = userInfo['email']
+  # Get user's email address
+  userSession = session.get('user')
+  userInfo = userSession['userinfo']
+  userEmail = userInfo['email']
 
+  if request.method == 'GET':
+    
     with db.get_db_cursor(True) as cur:
+        # Get user's bookshelf list
         cur.execute("SELECT bookshelfname FROM userinfo WHERE useremail = %s;", (userEmail,))
         rows = cur.fetchall()
         bookshelves = []
         for row in rows:
           bookshelves.append(row)
         
+        # Get list of shelved books
         books = []
         for bookshelf in bookshelves:
           cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = ANY(%s);", (userEmail, bookshelf,))
@@ -292,18 +295,24 @@ def BookShelf():
           books.append(temp)
 
     return render_template('Bookshelf.html', session=session.get('user'),
-                                             bookshelves=bookshelves,
-                                             books=books)
+                                              bookshelves=bookshelves,
+                                              books=books)
   
   else:
     # POST request = When user created new bookshelf
 
     # Get new bookshelf name
-    bookshelves = request.form.get('BookshelfName')
-    # for now, only newly created bookshelf is shown
+    data = request.get_json()
+    session['bookshelfName'] = data['bookshelfName']
+    # newBookshelf = request.form.get('bookshelfName')
+    
+    with db.get_db_cursor(True) as cur:
+      # Create a bookshelf in database
+      cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (userEmail, data['bookshelfName'],))
 
-    return render_template('Bookshelf.html', dict = bookshelves,
-                                             session=session.get('user'))
+    response = {'message': 'New bookshelf is created'}
+    return jsonify(response), 200
+  
 
 
 if __name__ == '__main__':

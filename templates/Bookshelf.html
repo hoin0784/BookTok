@@ -21,8 +21,8 @@
     <div class="pure-button add-shelf popup">
         <i class="fa-solid fa-plus" onclick="newShelfForm()"> Create new bookshelf</i>
         <div class="popuptext" id="popupBox">
-            <form class="pure-form" method="post">
-                <input type="text" name="BookshelfName" class="pure-input searchBox" placeholder="New bookshelf name"
+            <form class="pure-form" id="newBookshelf" method="post">
+                <input type="text" id="bookshelfName" name="bookshelfName" class="pure-input searchBox" placeholder="New bookshelf name"
                     required="" />
                 <br>
                 <button type="submit" class="pure-button create-shelf-button">

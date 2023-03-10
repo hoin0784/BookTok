@@ -10,26 +10,35 @@ function closePopup(){
 }
 
 
-
-// // code reference: Stackoverflow https://stackoverflow.com/questions/14643617/create-table-using-javascript
-// function createShelf() {
-//     const body = document.body, tbl = document.createElement('table');
-
-//     for (let i = 0; i < 4; i++) {
-//         const tr = tbl.insertRow();
-//         for (let j = 0; j < 1; j++) {
-//             if (i === 1 && j === 1) {
-//                 break;
-//             } 
-//             else {
-//                 const td = tr.insertCell();
-//                 td.appendChild(document.createTextNode(`Add a book`));
-//                 td.style.border = '1px solid black';
-//                 if (i === 1 && j === 1) {
-//                 td.setAttribute('rowSpan', '2');
-//                 }
-//             }
-//         }
-//     }
-//     body.appendChild(tbl);
-// };
+$(document).ready(function() {
+    $('#newBookshelf').submit(function(event) {
+      event.preventDefault();
+  
+      // Serialize the form data into a JSON object
+      var formData = $(this).serializeArray();
+      var jsonData = {};
+      $.each(formData, function() {
+        jsonData[this.name] = this.value;
+      });
+  
+      // Send an AJAX POST request to the server with the form data
+      $.ajax({
+        type: 'POST',
+        url: '/bookshelf',
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+          // Handle the successful response from the server
+          console.log('Form submitted successfully:', response);
+  
+          // Update the page with the response data
+          $('#result').text(response.message);
+        },
+        error: function(xhr, status, error) {
+          // Handle the error response from the server
+          console.error('Error submitting form:', error);
+        }
+      });
+    });
+  });
+  
