@@ -96,7 +96,6 @@ def home():
       else:
         genres = 'Children'
     
-    
     request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&key={GOOGLE_API_KEY}'
     response = requests.get(request_url).json()
     items_length = len(response['items'])
@@ -241,7 +240,7 @@ def BookSearchList():
     # Changed URL format for fetching ..
     # (ex: Harry potter -> Harry+potter)
     url_BookTitle = BookTitle.replace(" ", "+")
-
+  
     # This is already defaulted 10 (from Google Books Api), so we do not need to set max.
     # I have set the global variable GOOGLE_API_KEY from line 21. 
 
@@ -253,17 +252,16 @@ def BookSearchList():
     author_names = []
     book_thumbnails = []
     book_published_dates =[]
-  
-    # Get the data from the json (title, authors, thumbnail,publishedDate)
-    for i in range(items_length):
-  
-      book_title.append(response['items'][i]['volumeInfo']['title'])
-      author_names.append(response['items'][i]['volumeInfo']['authors'][0])
-      book_thumbnails.append(response['items'][i]['volumeInfo']['imageLinks']['thumbnail'])
-      book_published_dates.append(response['items'][i]['volumeInfo']['publishedDate'])
 
-     
-  return render_template('BookSearchList.html', items_length = items_length,
+    # Get the data from the json (title, authors, thumbnail,publishedDate)
+    
+    for i in range(items_length):
+      book_title.append(response['items'][i]['volumeInfo'].get('title', ''))
+      author_names.append(response['items'][i]['volumeInfo'].get('authors', [''])[0])
+      book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
+      book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
+
+  return render_template('BookSearchList.html', items_length=items_length,
                                                 book_title = book_title,
                                                 author_names = author_names,
                                                 book_thumbnails = book_thumbnails,
