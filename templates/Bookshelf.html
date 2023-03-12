@@ -29,7 +29,7 @@
                     Save
                 </button>
                 <button class="pure-button create-shelf-button" onclick="closePopup()">
-                    Delete
+                    Close
                 </button>
             </form>
         </div>
@@ -39,6 +39,9 @@
         <table class="pure-table pure-table-horizontal" id="bookshelf">
             <thead>
                 {{bookshelves[i][0]}}
+                <button class="delete-button" data-id="{{bookshelves[i][0]}}">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
             </thead>
             <tbody>
                 {% for book in books[i] %}

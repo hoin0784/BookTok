@@ -9,36 +9,29 @@ function closePopup(){
     document.getElementById("popupBox").style.display = 'none';
 }
 
-
+// After new bookshelf is created
+// Bring GET request result after POST request
 $(document).ready(function() {
-    $('#newBookshelf').submit(function(event) {
-      event.preventDefault();
+  $('#newBookshelf').submit(function(event) {
+    event.preventDefault();
+    var formData = $(this).serializeArray();
+    var jsonData = {};
+
+    $.each(formData, function() {
+      jsonData[this.name] = this.value;
+    });
   
-      // Serialize the form data into a JSON object
-      var formData = $(this).serializeArray();
-      var jsonData = {};
-      $.each(formData, function() {
-        jsonData[this.name] = this.value;
-      });
-  
-      // Send an AJAX POST request to the server with the form data
-      $.ajax({
-        type: 'POST',
-        url: '/bookshelf',
-        data: JSON.stringify(jsonData),
-        contentType: 'application/json',
-        success: function(response) {
-          // Handle the successful response from the server
-          console.log('Form submitted successfully:', response);
-  
-          // Update the page with the response data
-          $('#result').text(response.message);
-        },
-        error: function(xhr, status, error) {
-          // Handle the error response from the server
-          console.error('Error submitting form:', error);
-        }
-      });
+    $.ajax({
+      type: 'POST',
+      url: '/bookshelf',
+      data: JSON.stringify(jsonData),
+      contentType: 'application/json',
+      success: function(response) {
+        $('#result').text(response.message);
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      }
     });
   });
-  
+});

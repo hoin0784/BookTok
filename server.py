@@ -268,7 +268,7 @@ def BookSearchList():
                                                 book_published_dates = book_published_dates,
                                                 session = session.get('user'))
 
-@app.route('/bookshelf', methods = ['GET','POST'])
+@app.route('/bookshelf', methods = ['GET','POST', 'DELETE'])
 def BookShelf():
   if session.get('user') is None:
     return render_template('UserOnly.html', session = session.get('user'))
@@ -299,7 +299,7 @@ def BookShelf():
       return render_template('Bookshelf.html', session=session.get('user'),
                                                 bookshelves=bookshelves,
                                                 books=books)
-    
+
     else:
       # POST request = When user created new bookshelf
 
@@ -315,7 +315,6 @@ def BookShelf():
       response = {'message': 'New bookshelf is created'}
       return jsonify(response), 200
 
-  
 
 
 if __name__ == '__main__':
