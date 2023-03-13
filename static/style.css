@@ -1,233 +1,239 @@
 /*
  * -- BASE STYLES --
  */
- body {
-    color: #526066;
-  }
-  
-  h2,
-  h3 {
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  
-  p {
-    line-height: 1.6em;
-  }
-  
-  /*
+body {
+  color: #526066;
+}
+
+h2,
+h3 {
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.6em;
+}
+
+/*
    * -- Layout Styles --
    */
-  .l-content {
-    margin: 10 auto;
-  }
-  
-  .l-box {
-    padding: 0.5em 2em;
-  }
-  
-  /*
+.l-content {
+  margin: 10 auto;
+}
+
+.l-box {
+  padding: 0.5em 2em;
+}
+
+/*
    * -- MENU STYLES --
    */
-  .pure-menu {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  }
-  
-  .pure-menu-link {
-    padding: 0.5em 0.7em;
-  }
-  
-  /*
+.pure-menu {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.pure-menu-link {
+  padding: 0.5em 0.7em;
+}
+
+/*
    * -- BANNER --
    * The top banner with the headings. By using a combination
    * of `display: table;` and `display: table-cell;`, we can
    * vertically center the text.
    */
 
-  .banner-head {
+.banner-head {
 
-    text-align: center;
-    margin-bottom: 50px;
-    font-size: 2em;
-    color: Black;
-    font-weight: 500;
-    text-shadow: 0 1px 1px black;
-  }
-  
-  /*
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2em;
+  color: Black;
+  font-weight: 500;
+  text-shadow: 0 1px 1px black;
+}
+
+/*
    * -- GENRE TABLE WRAPPER --
    * This element wraps up all the pricing table elements
    */
-  .genres,
-  .information {
-    max-width: 980px;
-    margin: 0 auto;
-  }
-  .genres {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);  
-    margin-bottom: 3.125em;
-    text-align: center;
-    place-items: center;
-    padding-right: 4em;
-  }
+.genres,
+.information {
+  max-width: 980px;
+  margin: 0 auto;
+}
 
-   /*
+.genres {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin-bottom: 3.125em;
+  text-align: center;
+  place-items: center;
+  padding-right: 4em;
+}
+
+/*
    * -- GENRE TABLE BUTTONS  --
    */
 
-   .genre-button {
-    border: none;
-    font-size: large;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    cursor: pointer;
-    display: inline-block;
-    height: 100px;
-    width: 155px;
-    
-    
-   }
-
-   #romance_button{
-    background-color: lightblue;
-   }
-
-   #thriller_button{
-    background-color: lavender;
-   }
-
-   #nonfiction_button{
-    background-color: lightseagreen;
-   }
-
-   #horror_button{
-    background-color: lightcoral;
-   }
-
-   #comedy_button{
-    background-color: lightskyblue;
-   }
-
-   #children_button{
-    background-color: palevioletred;
-   }
+.genre-button {
+  border: none;
+  font-size: large;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  cursor: pointer;
+  display: inline-block;
+  height: 100px;
+  width: 155px;
 
 
-   #romance_button:hover{
-    background-color: rgb(115, 171, 190);
-   }
+}
 
-   #thriller_button:hover{
-    background-color: rgb(184, 184, 222);
-   }
+#romance_button {
+  background-color: lightblue;
+}
 
-   #nonfiction_button:hover{
-    background-color: rgb(20, 132, 126);
-   }
+#thriller_button {
+  background-color: lavender;
+}
 
-   #horror_button:hover{
-    background-color: rgb(208, 98, 98);
-   }
+#nonfiction_button {
+  background-color: lightseagreen;
+}
 
-   #comedy_button:hover{
-    background-color: rgb(85, 143, 180);
-   }
+#horror_button {
+  background-color: lightcoral;
+}
 
-   #children_button:hover{
-    background-color: rgb(171, 69, 103);
-   }
-  
-  /*
+#comedy_button {
+  background-color: lightskyblue;
+}
+
+#children_button {
+  background-color: palevioletred;
+}
+
+
+#romance_button:hover {
+  background-color: rgb(115, 171, 190);
+}
+
+#thriller_button:hover {
+  background-color: rgb(184, 184, 222);
+}
+
+#nonfiction_button:hover {
+  background-color: rgb(20, 132, 126);
+}
+
+#horror_button:hover {
+  background-color: rgb(208, 98, 98);
+}
+
+#comedy_button:hover {
+  background-color: rgb(85, 143, 180);
+}
+
+#children_button:hover {
+  background-color: rgb(171, 69, 103);
+}
+
+/*
    * -- GENRE TABLE HEADER --
    */
-  .genre-table-header {
-    background: #111;
-    color: #fff;
-  }
-  .genre-table h2 {
-    margin: 0;
-    padding-top: 2em;
-    font-size: 1em;
-    font-weight: normal;
-  }
+.genre-table-header {
+  background: #111;
+  color: #fff;
+}
+
+.genre-table h2 {
+  margin: 0;
+  padding-top: 2em;
+  font-size: 1em;
+  font-weight: normal;
+}
 
 
-  /* GENRE PAGES */
+/* GENRE PAGES */
 
-  .genre_lists {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);  
-    width: 70%;
-    font-size: medium;
-    text-align: center;
-    border-radius: 2em;
-    margin: 2em;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2em;
-  }
-  
-  /* ACCOUNT PAGE */
+.genre_lists {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 70%;
+  font-size: medium;
+  text-align: center;
+  border-radius: 2em;
+  margin: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2em;
+}
 
-  .account_logo{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 7%;
-  }
-  .welcome{
-    text-align: center;
-  }
-  
+/* ACCOUNT PAGE */
+
+.account_logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 7%;
+}
+
+.welcome {
+  text-align: center;
+}
+
 /* profile picture */
-  .profile_pic{ 
-    display: block;
-    border: #165178;
-    text-decoration: underline;
-    font-family: sans-serif;
-    text-align: center;
-  }
+.profile_pic {
+  display: block;
+  border: #165178;
+  text-decoration: underline;
+  font-family: sans-serif;
+  text-align: center;
+}
 
-  /* FOOTER */
-  
-  .footer {
-    background: #111;
-    color: #888;
-    text-align: center;
-  }
-  .footer a {
-    color: #ddd;
-  }
+/* FOOTER */
 
-  
-  /*
+.footer {
+  background: #111;
+  color: #888;
+  text-align: center;
+}
+
+.footer a {
+  color: #ddd;
+}
+
+
+/*
    * -- TABLET MEDIA QUERIES --
    * On tablets, we want to slightly adjust the size of the banner
    * text and add some vertical space between the various pricing tables
    */
-  @media (min-width: 767px) {
-    .banner-head {
-      font-size: 3em;
-    }
-    .pricing-table {
-      margin-bottom: 0;
-    }
+@media (min-width: 767px) {
+  .banner-head {
+    font-size: 3em;
   }
-  
-  /*
+
+  .pricing-table {
+    margin-bottom: 0;
+  }
+}
+
+/*
    * -- PHONE MEDIA QUERIES --
    * On phones, we want to reduce the height and font-size of the banner further
    */
-  @media (min-width: 480px) {
-    .banner {
-      height: 400px;
-    }
-    .banner-head {
-      font-size: 2em;
-    }
+@media (min-width: 480px) {
+  .banner {
+    height: 400px;
   }
+
+  .banner-head {
+    font-size: 2em;
+  }
+}
 
 
 /* FEATURED BOOKS LIST */
@@ -244,16 +250,16 @@
 
 
 /* BOOK SHELF */
-.add-shelf{
+.add-shelf {
   position: absolute;
   right: 20px;
 }
 
-.create-shelf-button{
-  font-size: 40px;
+.create-shelf-button {
+  font-size: 20px;
 }
 
-.bookshelf-login{ 
+.bookshelf-login {
   background: rgb(131, 219, 246);
   color: white;
   margin: auto;
@@ -262,61 +268,86 @@
   text-align: center;
 }
 
+#bookshelf {
+  width: 750px;
+  border-collapse: collapse;
+  margin: 50px;
+  position: relative;
+  border: #111;
+
+}
+
+tr {
+  background: #3498db;
+  color: white;
+  font-weight: bold;
+}
+
 
 /* Code reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup */
-  .popup {
-    margin-right: 20px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.popup {
+  margin-right: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  display: none;
+  /* visibility: hidden; */
+  width: 300px;
+  background-color: #99c3f1;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  top: 140%;
+  left: 50%;
+  margin-left: -180px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #99c3f1 transparent transparent transparent;
+  transform: rotate(180deg);
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  /* The actual popup */
-  .popup .popuptext {
-    display: none;
-    /* visibility: hidden; */
-    width: 300px;
-    background-color: #99c3f1;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 10px;
-    position: absolute;
-    z-index: 1;
-    top: 140%;
-    left: 50%;
-    margin-left: -180px;
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  /* Popup arrow */
-  .popup .popuptext::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: #99c3f1 transparent transparent transparent;
-    transform: rotate(180deg);
+  to {
+    opacity: 1;
   }
-
-  /* Toggle this class - hide and show the popup */
-  .popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-  }
-
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-  }
-
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
+}
