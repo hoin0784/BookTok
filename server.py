@@ -286,21 +286,22 @@ def BookShelf():
       rows = cur.fetchall()
       bookshelves = []
       for row in rows:
-        bookshelves.append(row)
+        bookshelves.append(row[0])
       
       # Get list of shelved books
       books = []
       for bookshelf in bookshelves:
-        cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = ANY(%s);", (user_email, bookshelf,))
+        cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (user_email, bookshelf,))
         temp = [row for row in cur.fetchall()]
         books.append(temp)
 
     if request.method == 'GET':
       return render_template('Bookshelf.html', session=session.get('user'),
-                                                bookshelves=bookshelves,
-                                                books=books)
+                                               bookshelves=bookshelves,
+                                               books=books)
 
-    else:  # POST request = When user created new bookshelf
+    else:  
+      # POST request = When user created new bookshelf
 
       # Get new bookshelf name
       new_bookshelf = request.form.get('bookshelfName')
@@ -311,9 +312,24 @@ def BookShelf():
         cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
           
         # Render the HTML code for the newly created bookshelf
-        return render_template('bookshelf.html', session=session.get('user'),
-                                                 bookshelves=bookshelves,
-                                                 books=books)
+      return render_template('Bookshelf.html', session=session.get('user'),
+                                               bookshelves=bookshelves,
+                                               books=books)
+    
+
+@app.route('/delete/<bookshelf>', methods = ['POST'])
+def Delete_bookshelf(bookshelf):
+  # Get user's email address
+  user_session = session.get('user')
+  user_info = user_session['userinfo']
+  user_email = user_info['email']
+
+  # Delete bookshelf from database
+  with db.get_db_cursor(True) as cur:
+    cur.execute("DELETE FROM userinfo WHERE userEmail = %s AND bookshelfName = %s;", (user_email, bookshelf,))
+    cur.execute("DELETE FROM shelvedbooks WHERE userEmail = %s AND bookshelfName = %s;", (user_email, bookshelf,))
+
+  return redirect(url_for('BookShelf'))
 
 
 

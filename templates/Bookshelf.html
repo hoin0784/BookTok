@@ -35,25 +35,27 @@
         </div>
     </div>
 
-    <div id="bookshelf-list">
-        {% for i in range(bookshelves|length) %}
-            <table class="pure-table pure-table-horizontal" id="bookshelf">
+    {% for bookshelf in bookshelves %}
+        <table class="pure-table pure-table-horizontal" id="bookshelf">
+            <div class="bookshelfList">
                 <thead>
-                    {{bookshelves[i][0]}}
-                    <button class="delete-button" data-bookshelf-id="{{bookshelves[i]}}">
-                        delete
-                    </button>
+                    {{bookshelf}}
+                    <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
+                        <button type="submit" id="deleteButton">
+                            delete
+                        </button>
+                    </form>
                 </thead>
                 <tbody>
-                    {% for book in books[i] %}
+                    {% for book in books[bookshelves.index(bookshelf)] %}
                         <tr>
                             <td>{{book[0]}}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
-            </table>
-        {% endfor %}
-    </div>
+            </div>
+        </table>
+    {% endfor %}
 </p>
 
 {% endblock %}
