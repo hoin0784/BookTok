@@ -97,7 +97,7 @@ def home():
       else:
         genres = 'children'
     
-    request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&key={GOOGLE_API_KEY}'
+    request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&maxResults=12&key={GOOGLE_API_KEY}'
     response = requests.get(request_url).json()
     items_length = len(response['items'])
     book_title = []
@@ -260,7 +260,7 @@ def book_search_list():
     # This is already defaulted 10 (from Google Books Api), so we do not need to set max.
     # I have set the global variable GOOGLE_API_KEY from line 21. 
 
-    url = f'https://www.googleapis.com/books/v1/volumes?q={url_book_title}&key={GOOGLE_API_KEY}'
+    url = f'https://www.googleapis.com/books/v1/volumes?q={url_book_title}&maxResults=12&key={GOOGLE_API_KEY}'
     response = requests.get(url).json()
     items_length = len(response['items'])
 
@@ -277,6 +277,8 @@ def book_search_list():
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
 
+      print(book_thumbnails)
+
   return render_template('BookSearchList.html', items_length=items_length,
                                                 book_title = book_title,
                                                 author_names = author_names,
@@ -284,52 +286,68 @@ def book_search_list():
                                                 book_published_dates = book_published_dates,
                                                 session = session.get('user'))
 
-@app.route('/bookshelf', methods = ['GET','POST', 'DELETE'])
-def BookShelf():
+
+@app.route('/bookshelf', methods = ['GET','POST'])
+def book_shelf():
   if session.get('user') is None:
     return render_template('UserOnly.html', session = session.get('user'))
 
   else:
     # Get user's email address
-    userSession = session.get('user')
-    userInfo = userSession['userinfo']
-    userEmail = userInfo['email']
+    user_session = session.get('user')
+    user_info = user_session['userinfo']
+    user_email = user_info['email']
+
+    with db.get_db_cursor(True) as cur:
+      # Get user's bookshelf list
+      cur.execute("SELECT bookshelfname FROM userinfo WHERE useremail = %s;", (user_email,))
+      rows = cur.fetchall()
+      bookshelves = []
+      for row in rows:
+        bookshelves.append(row[0])
+      
+      # Get list of shelved books
+      books = []
+      for bookshelf in bookshelves:
+        cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (user_email, bookshelf,))
+        temp = [row for row in cur.fetchall()]
+        books.append(temp)
 
     if request.method == 'GET':
-
-      with db.get_db_cursor(True) as cur:
-          # Get user's bookshelf list
-          cur.execute("SELECT bookshelfname FROM userinfo WHERE useremail = %s;", (userEmail,))
-          rows = cur.fetchall()
-          bookshelves = []
-          for row in rows:
-            bookshelves.append(row)
-          
-          # Get list of shelved books
-          books = []
-          for bookshelf in bookshelves:
-            cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = ANY(%s);", (userEmail, bookshelf,))
-            temp = [row for row in cur.fetchall()]
-            books.append(temp)
-
       return render_template('Bookshelf.html', session=session.get('user'),
-                                                bookshelves=bookshelves,
-                                                books=books)
+                                               bookshelves=bookshelves,
+                                               books=books)
 
-    else:
+    else:  
       # POST request = When user created new bookshelf
 
       # Get new bookshelf name
-      data = request.get_json()
-      session['bookshelfName'] = data['bookshelfName']
-      # newBookshelf = request.form.get('bookshelfName')
+      new_bookshelf = request.form.get('bookshelfName')
+      bookshelves.append(new_bookshelf)
       
       with db.get_db_cursor(True) as cur:
         # Create a bookshelf in database
-        cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (userEmail, data['bookshelfName'],))
+        cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
+          
+        # Render the HTML code for the newly created bookshelf
+      return render_template('Bookshelf.html', session=session.get('user'),
+                                               bookshelves=bookshelves,
+                                               books=books)
+    
 
-      response = {'message': 'New bookshelf is created'}
-      return jsonify(response), 200
+@app.route('/delete/<bookshelf>', methods = ['POST'])
+def delete_bookshelf(bookshelf):
+  # Get user's email address
+  user_session = session.get('user')
+  user_info = user_session['userinfo']
+  user_email = user_info['email']
+
+  # Delete bookshelf from database
+  with db.get_db_cursor(True) as cur:
+    cur.execute("DELETE FROM userinfo WHERE userEmail = %s AND bookshelfName = %s;", (user_email, bookshelf,))
+    cur.execute("DELETE FROM shelvedbooks WHERE userEmail = %s AND bookshelfName = %s;", (user_email, bookshelf,))
+
+  return redirect(url_for('book_shelf'))
 
 
 # add a featured book to your bookshelf
