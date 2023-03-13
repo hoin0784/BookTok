@@ -11,7 +11,7 @@
 		{% for i in range(items_length): %}
 		<div class="pure-u-1 pure-u-md-1-3">
 			{% if book_thumbnails[i] is none %}
-				<img src="static/placeholderbook.svg" alt="Book picture" height="250"><br>
+				<img src="static/placeholder" alt="Book picture" height="250"><br>
 			{% else %}
 				<img src="{{book_thumbnails[i]}}" alt="Book picture" height="250"><br><br>
 			{% endif %}
