@@ -270,7 +270,7 @@ def book_search_list():
 
 
 @app.route('/bookshelf', methods = ['GET','POST'])
-def BookShelf():
+def book_shelf():
   if session.get('user') is None:
     return render_template('UserOnly.html', session = session.get('user'))
 
@@ -318,7 +318,7 @@ def BookShelf():
     
 
 @app.route('/delete/<bookshelf>', methods = ['POST'])
-def Delete_bookshelf(bookshelf):
+def delete_bookshelf(bookshelf):
   # Get user's email address
   user_session = session.get('user')
   user_info = user_session['userinfo']
@@ -329,7 +329,7 @@ def Delete_bookshelf(bookshelf):
     cur.execute("DELETE FROM userinfo WHERE userEmail = %s AND bookshelfName = %s;", (user_email, bookshelf,))
     cur.execute("DELETE FROM shelvedbooks WHERE userEmail = %s AND bookshelfName = %s;", (user_email, bookshelf,))
 
-  return redirect(url_for('BookShelf'))
+  return redirect(url_for('book_shelf'))
 
 
 
