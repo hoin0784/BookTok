@@ -11,8 +11,7 @@
     <img class ="account_logo" src= "static/Account.svg">
     {% if session %}
     <div class = "profile_pic">
-        <input type = "file" id = "profile_pic" hidden/>
-        <label for = "profile_pic"> Upload a profile picture </label>
+        <img src="{{session.userinfo.picture}}" alt="user_picture">
     </div>
         <h3 class = "welcome"> Welcome {{session.userinfo.name}}!</h3>
     {% else %}

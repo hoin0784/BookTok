@@ -71,6 +71,7 @@
                 <!-- login/logout button and welcome message-->
                 {% if session %}
                     <li class="pure-menu-item">
+                        <img src="{{session.userinfo.picture}}" style="width: 25px; height:25px" alt="user_picture">
                         Welcome {{session.userinfo.name}}!
                     </li>
                     <li class="pure-menu-item">
