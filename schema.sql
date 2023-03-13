@@ -11,17 +11,20 @@ CREATE TABLE shelvedBooks (
   bookTitle varchar not null
 );
 
-insert into shelvedbooks(useremail, bookshelfname, isbn, booktitle) 
-values ('kim01540@umn.edu', 
-        'my mystery books', 
-        '', 
-        '');
+insert into userinfo(useremail, bookshelfname) values ('esqui049@umn.edu', 'favorites');
 
+insert into shelvedbooks(useremail, bookshelfname, isbn, booktitle) values ('kim01540@umn.edu', 
+                                                                            'my mystery books', 
+                                                                            '', 
+                                                                            '');
 
 -- \dt             : (print out table )
 -- \d (table name) : (print out table info)
 drop table Book;
 SELECT * from Book;
+
+-- delete data from table
+TRUNCATE TABLE  table_name;
 
 -- OR make the class of book, profile
 -- create table Book(

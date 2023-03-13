@@ -45,3 +45,8 @@ def get_db_cursor(commit=False):
               connection.commit()
       finally:
           cursor.close()
+
+def add_book_to_bookshelf (user_email, bookshelf_name, isbn13, book_title):
+    with get_db_cursor(True) as cur:
+        cur.execute("INSERT INTO shelvedbooks (userEmail, bookshelfName, isbn, bookTitle) values (%s, %s, %s, %s)", (user_email, bookshelf_name, isbn13, book_title,))
+
