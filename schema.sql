@@ -11,12 +11,6 @@ CREATE TABLE shelvedBooks (
   bookTitle varchar not null
 );
 
-
-
-
-
-
-
 insert into shelvedbooks(useremail, bookshelfname, isbn, booktitle) 
 values ('kim01540@umn.edu', 
         'my mystery books', 
