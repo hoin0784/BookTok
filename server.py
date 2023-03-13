@@ -56,11 +56,7 @@ def login():
 def callback():
     token = oauth.auth0.authorize_access_token()
     session["user"] = token
-    
-
-    print("token testing...")
-    print(token)
-
+  
     return redirect("/")
 
 @app.route("/logout")
@@ -88,18 +84,18 @@ def home():
    # Get the value of the form when the user clicked the button
   if request.method == 'POST':
     for key, value in request.form.items():
-      if key == 'Romance':
+      if key == 'romance':
         genres = key
-      elif key == 'Thriller':
+      elif key == 'thriller':
         genres = key
-      elif key == 'Nonfiction':
+      elif key == 'nonfiction':
         genres = key
-      elif key == 'Horror':
+      elif key == 'horror':
         genres = key
-      elif key == 'Comedy':
+      elif key == 'comedy':
         genres = key
       else:
-        genres = 'Children'
+        genres = 'children'
     
     request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&key={GOOGLE_API_KEY}'
     response = requests.get(request_url).json()
@@ -164,9 +160,8 @@ def home():
                                       length = length,
                                       session = session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
-
 @app.route('/account')
-def Account():
+def account():
   return render_template('Account.html', session = session.get('user'))
 
 # @app.route('/genres')
@@ -174,7 +169,7 @@ def Account():
 #   return render_template('genres.html', session = session.get('user'))
 
 @app.route('/romance')
-def Romance(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+def romance(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
   return render_template('romance.html',romance_title = book_title,
                                         author_names = author_names,
@@ -184,7 +179,7 @@ def Romance(book_title, author_names, book_thumbnails, book_published_dates, ite
                                         session = session.get('user'))
       
 @app.route('/thriller')
-def Thriller(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+def thriller(book_title, author_names, book_thumbnails, book_published_dates, items_length):
   
   return render_template('thriller.html', thriller_title = book_title,
                                           author_names = author_names,
@@ -194,7 +189,7 @@ def Thriller(book_title, author_names, book_thumbnails, book_published_dates, it
                                           session = session.get('user'))
 
 @app.route('/nonfiction')
-def Nonfiction(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+def nonfiction(book_title, author_names, book_thumbnails, book_published_dates, items_length):
   
   return render_template('nonfiction.html', nonfiction_title = book_title,
                                             author_names = author_names,
@@ -204,7 +199,7 @@ def Nonfiction(book_title, author_names, book_thumbnails, book_published_dates, 
                                             session = session.get('user'))
 
 @app.route('/horror')
-def Horror(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+def horror(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
   return render_template('horror.html', horror_title = book_title,
                                         author_names = author_names,
@@ -214,7 +209,7 @@ def Horror(book_title, author_names, book_thumbnails, book_published_dates, item
                                         session=session.get('user'))
 
 @app.route('/childrens')
-def Children(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+def children(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
   return render_template('childrens.html',  children_title = book_title,
                                               author_names = author_names,
@@ -224,7 +219,7 @@ def Children(book_title, author_names, book_thumbnails, book_published_dates, it
                                               session = session.get('user'))
 
 @app.route('/comedy')
-def Comedy(book_title, author_names, book_thumbnails, book_published_dates, items_length):
+def comedy(book_title, author_names, book_thumbnails, book_published_dates, items_length):
 
   return render_template('comedy.html', comedy_title = book_title,
                                         author_names = author_names,
@@ -234,22 +229,22 @@ def Comedy(book_title, author_names, book_thumbnails, book_published_dates, item
                                         session = session.get('user'))
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
-def BookSearchList():
+def book_search_list():
 
   # This route method is almost 'POST' method 
   if request.method == 'POST':
   
     # Get the user input from the form
-    BookTitle = request.form.get('BookTitle')
+    title = request.form.get('book_title')
 
     # Changed URL format for fetching ..
     # (ex: Harry potter -> Harry+potter)
-    url_BookTitle = BookTitle.replace(" ", "+")
+    url_book_title = title.replace(" ", "+")
   
     # This is already defaulted 10 (from Google Books Api), so we do not need to set max.
     # I have set the global variable GOOGLE_API_KEY from line 21. 
 
-    url = f'https://www.googleapis.com/books/v1/volumes?q={url_BookTitle}&key={GOOGLE_API_KEY}'
+    url = f'https://www.googleapis.com/books/v1/volumes?q={url_book_title}&key={GOOGLE_API_KEY}'
     response = requests.get(url).json()
     items_length = len(response['items'])
 
