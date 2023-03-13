@@ -35,24 +35,25 @@
         </div>
     </div>
 
-    {% for i in range(bookshelves|length) %}
-        <table class="pure-table pure-table-horizontal" id="bookshelf">
-            <thead>
-                {{bookshelves[i][0]}}
-                <button class="delete-button" data-id="{{bookshelves[i][0]}}">
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
-            </thead>
-            <tbody>
-                {% for book in books[i] %}
-                    <tr>
-                        <td>{{book[0]}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endfor %}
-
+    <div id="bookshelf-list">
+        {% for i in range(bookshelves|length) %}
+            <table class="pure-table pure-table-horizontal" id="bookshelf">
+                <thead>
+                    {{bookshelves[i][0]}}
+                    <button class="delete-button" data-bookshelf-id="{{bookshelves[i]}}">
+                        delete
+                    </button>
+                </thead>
+                <tbody>
+                    {% for book in books[i] %}
+                        <tr>
+                            <td>{{book[0]}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
 </p>
 
 {% endblock %}
