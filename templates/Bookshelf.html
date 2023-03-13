@@ -8,11 +8,10 @@
 <br><br><br>
 
 <h2 class="banner-head"> Your bookshelf</h2> <br><br>
-
     <div class="pure-button add-shelf popup">
-        <i class="fa-solid fa-plus" onclick="newShelfForm()"> Create new bookshelf</i>
+        <i class="fa-solid fa-plus" id = "create-new" onclick="newShelfForm()"> Create new bookshelf</i>
         <div class="popuptext" id="popupBox">
-            <form class="pure-form" id="newBookshelf" method="post">
+            <form class="pure-form" id="newBookshelf" method="post" novalidate >
                 <input type="text" id="bookshelfName" name="bookshelfName" class="pure-input searchBox" placeholder="New bookshelf name"
                     required="" />
                 <br>
@@ -25,19 +24,19 @@
             </form>
         </div>
     </div>
+    <br><br>
 
+<div id = "bookshelf-div">
     {% for i in range(bookshelves|length) %}
-        <table class="pure-table pure-table-bordered" id="bookshelf">
-            <thead>
+        <table class="pure-u-1 pure-u-md-1-2" id="bookshelf">
+            <thead >
                 {{bookshelves[i][0]}}
-                <tr>
-                    <button class="delete-button" data-id="{{bookshelves[i][0]}}">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                </tr>
+                <th>
+                    <button class="fa-solid fa-trash-can" id = "trash-button" onclick="delete_bookshelf()" data-id="{{bookshelves[i][0]}}"></button>
+                </th>
             </thead>
 
-            <tbody>
+            <tbody id = "bookshelf-body">
                 <tr>
                 {% for book in books[i] %}
                     <tr>
@@ -45,10 +44,11 @@
                     </tr>
                 {% endfor %}
                 </tr>
-            </tbody>
-
+        </tbody>
         </table>
+
     {% endfor %}
+</div>
 
 
 {% endblock %}

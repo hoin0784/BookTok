@@ -3,6 +3,11 @@ function newShelfForm() {
     document.getElementById("popupBox").style.display = 'block';
 };
 
+// delete bookshelf
+function delete_bookshelf(){
+  console.log("hello");
+
+};
 
 // Hide pop up box when "delete" button is clicked
 function closePopup(){
