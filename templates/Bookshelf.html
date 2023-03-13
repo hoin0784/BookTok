@@ -8,11 +8,10 @@
 <br><br><br>
 
 <h2 class="banner-head"> Your bookshelf</h2> <br><br>
-
     <div class="pure-button add-shelf popup">
-        <i class="fa-solid fa-plus" onclick="newShelfForm()"> Create new bookshelf</i>
+        <i class="fa-solid fa-plus" id = "create-new" onclick="newShelfForm()"> Create new bookshelf</i>
         <div class="popuptext" id="popupBox">
-            <form class="pure-form" id="newBookshelf" method="post">
+            <form class="pure-form" id="newBookshelf" method="post" novalidate >
                 <input type="text" id="bookshelfName" name="bookshelfName" class="pure-input searchBox" placeholder="New bookshelf name"
                     required="" />
                 <br>
@@ -25,13 +24,14 @@
             </form>
         </div>
     </div>
+    <br><br>
 
     {% for bookshelf in bookshelves %}
         <table class="pure-table pure-table-bordered" id="bookshelf">
             <thead>
                 {{bookshelf}}
                 <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
-                    <button type="submit" id="deleteButton">
+                    <button type="submit" id="deleteButton" onclick="delete_bookshelf()">
                         delete
                     </button>
                 </form>
@@ -44,6 +44,8 @@
                 {% endfor %}
             </tbody>
         </table>
+
     {% endfor %}
+</div>
 
 {% endblock %}

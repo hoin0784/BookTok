@@ -250,9 +250,14 @@ p {
 
 
 /* BOOK SHELF */
+#create-new{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
 .add-shelf {
   position: absolute;
   right: 20px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .create-shelf-button{
@@ -268,7 +273,8 @@ p {
   text-align: center;
 }
 
-#bookshelf {
+.pure-table {
+  border-style: dotted;
   width: 750px;
   border-collapse: collapse;
   margin: 50px;
@@ -277,12 +283,27 @@ p {
 
 }
 
-tr {
-  background: #3498db;
-  color: white;
-  font-weight: bold;
+#bookshelf-div{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: #111;
+  border-style: dotted;
+  /* grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr); */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+#bookshelf-body{
+  border: #111;
+  border-style: dotted;
+  /* grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr); */
+}
+
+#trash-button{
+  margin-left: auto;
+}
 
 /* Code reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup */
 .popup {
