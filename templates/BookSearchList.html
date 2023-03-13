@@ -1,19 +1,19 @@
 {% extends "Home.html" %}
-{% block title %} Book search results! {% endblock %}
+{% block title %} Results {% endblock %}
 
 {% block content %}
 
 <br>
 <br><br>
-<h2 class="banner-head"> Book search results!</h2>
+<h2 class="banner-head"> Results</h2>
 <div class="genre_lists">
 	<div class="pure-g">
 		{% for i in range(items_length): %}
 		<div class="pure-u-1 pure-u-md-1-3">
 			{% if book_thumbnails[i] is none %}
-			<img src="static/placeholderbook.svg" alt="Book picture" height="300"><br>
+				<img src="static/placeholderbook.svg" alt="Book picture" height="250"><br>
 			{% else %}
-			<img src="{{book_thumbnails[i]}}" alt="Book picture" height="300"><br>
+				<img src="{{book_thumbnails[i]}}" alt="Book picture" height="250"><br><br>
 			{% endif %}
 
 			{{book_title[i]}}<br>

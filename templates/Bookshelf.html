@@ -1,23 +1,14 @@
-{% extends "Navi.html" %}
+{% extends "Home.html" %}
 {% block title %} My Bookshelf {% endblock %}
 
-{% block head %}
-
-    <link rel="stylesheet" href="/css/pure/pure-min.css">
-    <link rel="stylesheet" href="/css/pure/grids-responsive-min.css">
-    <link rel="stylesheet" href="/static/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script async defer src="/static/functions.js"></script>
-    
-{% endblock %}
 
 {% block content %}
 
 <br>
 <br><br><br>
 
-<h2 class="banner-head"> Your bookshelf</h2>
-<p>
+<h2 class="banner-head"> Your bookshelf</h2> <br><br>
+
     <div class="pure-button add-shelf popup">
         <i class="fa-solid fa-plus" onclick="newShelfForm()"> Create new bookshelf</i>
         <div class="popuptext" id="popupBox">
@@ -36,23 +27,28 @@
     </div>
 
     {% for i in range(bookshelves|length) %}
-        <table class="pure-table pure-table-horizontal" id="bookshelf">
+        <table class="pure-table pure-table-bordered" id="bookshelf">
             <thead>
                 {{bookshelves[i][0]}}
-                <button class="delete-button" data-id="{{bookshelves[i][0]}}">
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
+                <tr>
+                    <button class="delete-button" data-id="{{bookshelves[i][0]}}">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </tr>
             </thead>
+
             <tbody>
+                <tr>
                 {% for book in books[i] %}
                     <tr>
                         <td>{{book[0]}}</td>
                     </tr>
                 {% endfor %}
+                </tr>
             </tbody>
+
         </table>
     {% endfor %}
 
-</p>
 
 {% endblock %}

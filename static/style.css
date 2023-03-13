@@ -255,8 +255,8 @@ p {
   right: 20px;
 }
 
-.create-shelf-button {
-  font-size: 20px;
+.create-shelf-button{
+  font-size: 40px;
 }
 
 .bookshelf-login {
@@ -266,21 +266,6 @@ p {
   border-radius: 4px;
   width: 130px;
   text-align: center;
-}
-
-#bookshelf {
-  width: 750px;
-  border-collapse: collapse;
-  margin: 50px;
-  position: relative;
-  border: #111;
-
-}
-
-tr {
-  background: #3498db;
-  color: white;
-  font-weight: bold;
 }
 
 
