@@ -97,7 +97,7 @@ def home():
       else:
         genres = 'children'
     
-    request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&key={GOOGLE_API_KEY}'
+    request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&maxResults=12&key={GOOGLE_API_KEY}'
     response = requests.get(request_url).json()
     items_length = len(response['items'])
     book_title = []
@@ -244,7 +244,7 @@ def book_search_list():
     # This is already defaulted 10 (from Google Books Api), so we do not need to set max.
     # I have set the global variable GOOGLE_API_KEY from line 21. 
 
-    url = f'https://www.googleapis.com/books/v1/volumes?q={url_book_title}&key={GOOGLE_API_KEY}'
+    url = f'https://www.googleapis.com/books/v1/volumes?q={url_book_title}&maxResults=12&key={GOOGLE_API_KEY}'
     response = requests.get(url).json()
     items_length = len(response['items'])
 
@@ -260,6 +260,8 @@ def book_search_list():
       author_names.append(response['items'][i]['volumeInfo'].get('authors', [''])[0])
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
+
+      print(book_thumbnails)
 
   return render_template('BookSearchList.html', items_length=items_length,
                                                 book_title = book_title,
