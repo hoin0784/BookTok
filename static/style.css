@@ -262,6 +262,20 @@
   text-align: center;
 }
 
+#bookshelf {
+  width: 750px; 
+	border-collapse: collapse; 
+	margin:50px;
+  position: relative;
+  border: #111;
+
+}
+tr { 
+	background: #3498db; 
+	color: white; 
+	font-weight: bold; 
+	}
+
 
 /* Code reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup */
   .popup {
