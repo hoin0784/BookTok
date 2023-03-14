@@ -31,7 +31,7 @@
                 <i class="fa-solid fa-plus" id = "create-new" onclick="newShelfForm()"> Create new bookshelf</i>
                 <div class="popuptext" id="popupBox">
                     <form class="pure-form" id="newBookshelf" method="post" novalidate >
-                        <input type="text" id="bookshelfName" name="bookshelfName" class="pure-input searchBox" placeholder="New bookshelf name"
+                        <input type="text" id="bookshelf_name" name="bookshelf_name" class="pure-input searchBox" placeholder="New bookshelf name"
                             required="" />
                         <br>
                         <button type="submit" class="pure-button create-shelf-button">
@@ -48,7 +48,7 @@
             <!-- If an user has bookshelves -->
             {% if bookshelves %}
                 {% for bookshelf in bookshelves %}
-                    <table class="pure-table pure-table-bordered" id="bookshelf"><p>
+                    <table class="pure-table-bordered" id="bookshelf">
                         <thead>
                             {{bookshelf}}
                             <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
@@ -60,7 +60,7 @@
                         <tbody>
                             {% for book in books[bookshelves.index(bookshelf)] %}
                                 <tr>
-                                    <td>{{book[0]}}</td>
+                                    <td id = "book_individual">{{book[0]}}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -71,7 +71,7 @@
             <!-- If an user doesn't have any bookshelf -->
             {% else %}
                 <br>
-                <h3 class = "welcome">You don't any bookshelves!</h3>
+                <h3 class = "welcome">You don't have any bookshelves!</h3>
             {% endif %}
     </div>
 </div>
