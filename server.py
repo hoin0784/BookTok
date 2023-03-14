@@ -320,21 +320,48 @@ def book_shelf():
                                                bookshelves=bookshelves,
                                                books=books)
 
-    else:  
-      # POST request = When user created new bookshelf
+    else:
+      # POST request = when user searched user's bookshelf
+      # The method of filtering is similar to the code directly above.
+      # However this else statement (code from 324 - 344 ) is filtered by search_content by user's input
 
-      # Get new bookshelf name
-      new_bookshelf = request.form.get('bookshelfName')
-      bookshelves.append(new_bookshelf)
-      
-      with db.get_db_cursor(True) as cur:
-        # Create a bookshelf in database
-        cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
+      if request.form.get('book_shelf'):
+
+        search_content = request.form.get('book_shelf')
+        
+        with db.get_db_cursor(commit=True) as cur:
+          cur.execute("SELECT bookshelfname FROM userinfo WHERE bookshelfname = %s;", (search_content,))
+          rows = cur.fetchall()
+          bookshelves = []
           
-        # Render the HTML code for the newly created bookshelf
-      return render_template('Bookshelf.html', session=session.get('user'),
-                                               bookshelves=bookshelves,
-                                               books=books)
+          for row in rows:
+            bookshelves.append(row[0])
+
+          books = []
+          for bookshelf in bookshelves:
+            cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (user_email, bookshelf,))
+            temp = [row for row in cur.fetchall()]
+            books.append(temp)
+
+        return render_template('Bookshelf.html', session=session.get('user'),
+                                                 bookshelves=bookshelves,
+                                                 books=books)
+      
+      else:
+        # POST request = When user created new bookshelf
+
+        # Get new bookshelf name
+        new_bookshelf = request.form.get('bookshelfName')
+        bookshelves.append(new_bookshelf)
+        
+        with db.get_db_cursor(True) as cur:
+          # Create a bookshelf in database
+          cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
+            
+          # Render the HTML code for the newly created bookshelf
+        return render_template('Bookshelf.html', session=session.get('user'),
+                                                bookshelves=bookshelves,
+                                                books=books)
     
 
 @app.route('/delete/<bookshelf>', methods = ['POST'])

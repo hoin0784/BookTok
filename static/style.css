@@ -281,6 +281,17 @@ p {
   font-size: 20px;
 }
 
+#bookshelf-search{
+  display:flex;
+  justify-content: center;
+}
+
+#bookshelf-input{
+  border-radius: 1rem;
+  padding: 1rem 3rem;
+  outline-color: wheat;
+}
+
 .bookshelf-login {
   background: rgb(131, 219, 246);
   color: white;
