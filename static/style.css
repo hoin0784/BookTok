@@ -38,6 +38,7 @@ p {
   padding: 0.5em 0.7em;
 }
 
+
 /*
    * -- BANNER --
    * The top banner with the headings. By using a combination
@@ -194,16 +195,33 @@ p {
 }
 
 /* FOOTER */
+.page-box {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contents-box {
+  padding-bottom: 4rem;
+}
 
 .footer {
-  background: #111;
-  color: #888;
+  background: #79ceed;
+  opacity: 0.9;
+  color: #161616;
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+  margin-top: 10px;
 }
 
 .footer a {
   color: #ddd;
 }
+
 
 
 /*

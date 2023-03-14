@@ -115,12 +115,13 @@ a.pure-button-primary {
 .home-menu a {
     font-size: 23px;
     color: #2493dd;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: #165178;
+    background-color: #ffffff;
 }
 
 
@@ -194,3 +195,4 @@ a.pure-button-primary {
 .menu-items-margin{
     margin-top: 18px;
 }
+
