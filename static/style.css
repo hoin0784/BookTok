@@ -38,13 +38,9 @@ p {
   padding: 0.5em 0.7em;
 }
 
-
 /*
    * -- BANNER --
-   * The top banner with the headings. By using a combination
-   * of `display: table;` and `display: table-cell;`, we can
-   * vertically center the text.
-   */
+*/
 
 .banner-head {
 
@@ -57,9 +53,8 @@ p {
 }
 
 /*
-   * -- GENRE TABLE WRAPPER --
-   * This element wraps up all the pricing table elements
-   */
+* -- GENRES --
+*/
 .genres,
 .information {
   max-width: 980px;
@@ -76,10 +71,6 @@ p {
   padding-right: 4em;
 }
 
-/*
-   * -- GENRE TABLE BUTTONS  --
-   */
-
 .genre-button {
   border: none;
   font-size: large;
@@ -88,8 +79,6 @@ p {
   display: inline-block;
   height: 100px;
   width: 155px;
-
-
 }
 
 #romance_button {
@@ -141,9 +130,6 @@ p {
   background-color: rgb(171, 69, 103);
 }
 
-/*
-   * -- GENRE TABLE HEADER --
-   */
 .genre-table-header {
   background: #111;
   color: #fff;
@@ -155,9 +141,6 @@ p {
   font-size: 1em;
   font-weight: normal;
 }
-
-
-/* GENRE PAGES */
 
 .genre_lists {
   grid-template-columns: repeat(3, 1fr);
@@ -185,71 +168,12 @@ p {
   text-align: center;
 }
 
-/* profile picture */
 .profile_pic {
   display: block;
   border: #165178;
   text-decoration: underline;
   font-family: sans-serif;
   text-align: center;
-}
-
-/* FOOTER */
-.page-box {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.contents-box {
-  padding-bottom: 7rem;
-}
-
-.footer {
-  background: #79ceed;
-  opacity: 0.9;
-  color: #161616;
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 4rem;
-}
-
-.footer a {
-  color: #ddd;
-}
-
-
-
-/*
-   * -- TABLET MEDIA QUERIES --
-   * On tablets, we want to slightly adjust the size of the banner
-   * text and add some vertical space between the various pricing tables
-   */
-@media (min-width: 767px) {
-  .banner-head {
-    font-size: 3em;
-  }
-
-  .pricing-table {
-    margin-bottom: 0;
-  }
-}
-
-/*
-   * -- PHONE MEDIA QUERIES --
-   * On phones, we want to reduce the height and font-size of the banner further
-   */
-@media (min-width: 480px) {
-  .banner {
-    height: 400px;
-  }
-
-  .banner-head {
-    font-size: 2em;
-  }
 }
 
 
@@ -263,6 +187,22 @@ p {
   margin-left: auto;
   margin-right: auto;
   padding: 2em;
+}
+
+#add_button{
+  margin-bottom: -4px;
+  width:20px;
+  height: 20px;
+}
+
+#add_button:hover{
+  background-color: #c6baba;
+}
+
+.add_to_bookshelf{
+  margin-top: 20px;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 
@@ -379,6 +319,63 @@ p {
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
 }
+
+/* FOOTER */
+.page-box {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contents-box {
+  padding-bottom: 7rem;
+}
+
+.footer {
+  background: #79ceed;
+  opacity: 0.9;
+  color: #161616;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+}
+
+.footer a {
+  color: #ddd;
+}
+
+/*
+   * -- TABLET MEDIA QUERIES --
+   * On tablets, we want to slightly adjust the size of the banner
+   * text and add some vertical space between the various pricing tables
+   */
+   @media (min-width: 767px) {
+    .banner-head {
+      font-size: 3em;
+    }
+  
+    .pricing-table {
+      margin-bottom: 0;
+    }
+  }
+  
+/*
+     * -- PHONE MEDIA QUERIES --
+     * On phones, we want to reduce the height and font-size of the banner further
+     */
+  @media (min-width: 480px) {
+    .banner {
+      height: 400px;
+    }
+  
+    .banner-head {
+      font-size: 2em;
+    }
+  }
+  
 
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
