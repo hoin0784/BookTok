@@ -78,7 +78,8 @@
                     <button type="submit" class ="add_to_bookshelf" id="{{featured_isbn13[i]}}" value="{{featured_isbn13[i]}}" onclick="add_book(document.getElementById('{{featured_isbn13[i]}}').value, document.getElementById('shelf_{{featured_isbn13[i]}}').value, '{{featured_title[i]}}')">
                         <img src ="static/svg/addbutton.svg" id ="add_button"></button>
                     <br>
-                    <br>
+                    <div id="status_{{featured_isbn13[i]}}"> <br> </div>
+                    
                 {% endif %}
             </div>         
         {% endfor %}

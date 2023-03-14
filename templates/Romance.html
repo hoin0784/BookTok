@@ -28,8 +28,10 @@
             {% endfor %}
           </select>
       
-      <button type="submit" class ="add_to_bookshelf" id="{{book_isbn13[i]}}" value="{{book_isbn13[i]}}" onclick="add_book(document.getElementById('{{book_isbn13[i]}}').value, document.getElementById('shelf_{{book_isbn13[i]}}').value, '{{romance_title[i]}}')">
-         <img src ="static/svg/addbutton.svg" id ="add_button"></button><br><br>
+      <button type="submit" class ="add_to_bookshelf" id="{{book_isbn13[i]}}" value="{{book_isbn13[i]}}" onclick='add_book(document.getElementById("{{book_isbn13[i]}}").value, document.getElementById("shelf_{{book_isbn13[i]}}").value, "{{romance_title[i]}}")'>
+         <img src ="static/svg/addbutton.svg" id ="add_button"></button>
+         <br>
+         <div id="status_{{book_isbn13[i]}}"> <br> </div>
       {% endif %}
       </div>
      {% endfor %}

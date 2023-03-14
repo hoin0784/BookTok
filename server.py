@@ -484,8 +484,9 @@ def add_featured_book():
     # if everything is good, send data to database
     book_in_bookshelf_status = db.check_bookshelf_for_book(user_email, bookshelf_name, book_isbn13, book_title)
    
+    print(book_in_bookshelf_status)
     # db.add_book_to_bookshelf(user_email, bookshelf_name, book_isbn13, book_title)
-    return {"random": "data1"}
+    return jsonify(status = book_in_bookshelf_status)
 
 if __name__ == '__main__':
 
