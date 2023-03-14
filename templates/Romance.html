@@ -1,4 +1,4 @@
-{% extends "Home.html" %}
+{% extends "Navi.html" %}
 {% block title %} Romance {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
       {% for i in range(items_length): %}
       <div class ="pure-u-1 pure-u-md-1-3">
         {% if book_thumbnails[i] is none %}
-          <img src="static/placeholderbook.svg" alt="Book picture" height="250"><br>
+          <img src="static/svg/placeholderbook.svg" alt="Book picture" height="250"><br>
         {% else %}
           <img src = "{{book_thumbnails[i]}}" alt="Book picture" height="300"><br>
         {% endif %}
@@ -29,7 +29,7 @@
           </select>
       
       <button type="submit" class ="add_to_bookshelf" id="{{book_isbn13[i]}}" value="{{book_isbn13[i]}}" onclick="add_book(document.getElementById('{{book_isbn13[i]}}').value, document.getElementById('shelf_{{book_isbn13[i]}}').value, '{{romance_title[i]}}')">
-         <img src ="static/addbutton.svg" id ="add_button"></button><br><br>
+         <img src ="static/svg/addbutton.svg" id ="add_button"></button><br><br>
       {% endif %}
       </div>
      {% endfor %}

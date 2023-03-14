@@ -1,4 +1,4 @@
-{% extends "Home.html" %}
+{% extends "Navi.html" %}
 {% block title %} Thriller {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
 <div class="book-info-container">
     <div class="book-info-picture">
         {% if book_thumbnails == '' %}
-            <img src="static/placeholderbook.svg" alt="Book picture" height="250"><br>
+            <img src="static/svg/placeholderbook.svg" alt="Book picture" height="250"><br>
         {% else %}
             <img src="{{book_thumbnails}}" alt="Book picture" height="250"><br><br>
         {% endif %}

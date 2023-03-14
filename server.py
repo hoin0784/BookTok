@@ -32,7 +32,6 @@ app.secret_key = env.get("APP_SECRET_KEY")
 def initialize():
   db.setup()
 
-
 # ======== Auth Stuff ===========
 oauth = OAuth(app)
 
@@ -121,8 +120,6 @@ def home():
     book_thumbnails = []
     book_published_dates = []
     book_isbn13 = []
-
-    print(response)
 
     for i in range(items_length):
       book_title.append(response['items'][i]['volumeInfo']['title'])
