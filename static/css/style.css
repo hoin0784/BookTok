@@ -205,15 +205,18 @@ p {
 }
 
 #title{
+font-family: 'american typewriter', serif;
+font-size:larger;
 
 }
 
 #author{
+  font: small;
 
 }
 
 #isbn{
-
+font-size: small;
 }
 
 #date{
@@ -222,7 +225,6 @@ p {
 
 
 /* BOOK SHELF */
-
 
 #create-new{
   font-family: Georgia, 'Times New Roman', Times, serif;
