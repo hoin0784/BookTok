@@ -10,6 +10,14 @@
         <br><br><br>
 
         <h2 class="banner-head"> Your bookshelf</h2> <br><br>
+
+            <form action="/book_shelf" id="bookshelf-search" method="post">
+                <input type="text" name="book_shelf" id="bookshelf-input" placeholder="Search for bookshelf">
+                <button type="submit" class="pure-button" img src="static/search.svg">
+                    <i class="fa fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+
             <div class="pure-button add-shelf popup">
                 <i class="fa-solid fa-plus" id = "create-new" onclick="newShelfForm()"> Create new bookshelf</i>
                 <div class="popuptext" id="popupBox">

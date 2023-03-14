@@ -316,21 +316,33 @@ def book_shelf():
                                                bookshelves=bookshelves,
                                                books=books)
 
-    else:  
-      # POST request = When user created new bookshelf
+    else:
+      # # POST request = when user searched user's bookshelf
+      # if request.form.get('book_shelf'):
 
-      # Get new bookshelf name
-      new_bookshelf = request.form.get('bookshelfName')
-      bookshelves.append(new_bookshelf)
-      
-      with db.get_db_cursor(True) as cur:
-        # Create a bookshelf in database
-        cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
+      #   with db.get_db_cursor(commit=True) as cur:
           
-        # Render the HTML code for the newly created bookshelf
-      return render_template('Bookshelf.html', session=session.get('user'),
-                                               bookshelves=bookshelves,
-                                               books=books)
+
+
+      #   return render_template('Bookshelf.html', session=session.get('user'),
+      #                          bookshelves=bookshelves,
+      #                          books=books)
+
+      # else:
+        # POST request = When user created new bookshelf
+
+        # Get new bookshelf name
+        new_bookshelf = request.form.get('bookshelfName')
+        bookshelves.append(new_bookshelf)
+        
+        with db.get_db_cursor(True) as cur:
+          # Create a bookshelf in database
+          cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
+            
+          # Render the HTML code for the newly created bookshelf
+        return render_template('Bookshelf.html', session=session.get('user'),
+                                                bookshelves=bookshelves,
+                                                books=books)
     
 
 @app.route('/delete/<bookshelf>', methods = ['POST'])
