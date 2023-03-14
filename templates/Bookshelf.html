@@ -27,27 +27,35 @@
                 </div>
             </div>
             <br><br>
+            
+            <!-- If an user has bookshelves -->
+            {% if bookshelves %}
+                {% for bookshelf in bookshelves %}
+                    <table class="pure-table pure-table-bordered" id="bookshelf">
+                        <thead>
+                            {{bookshelf}}
+                            <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
+                                <button type="submit" id="deleteButton" onclick="delete_bookshelf()">
+                                    delete
+                                </button>
+                            </form>
+                        </thead>
+                        <tbody>
+                            {% for book in books[bookshelves.index(bookshelf)] %}
+                                <tr>
+                                    <td>{{book[0]}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
 
-            {% for bookshelf in bookshelves %}
-                <table class="pure-table pure-table-bordered" id="bookshelf">
-                    <thead>
-                        {{bookshelf}}
-                        <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
-                            <button type="submit" id="deleteButton" onclick="delete_bookshelf()">
-                                delete
-                            </button>
-                        </form>
-                    </thead>
-                    <tbody>
-                        {% for book in books[bookshelves.index(bookshelf)] %}
-                            <tr>
-                                <td>{{book[0]}}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
-            {% endfor %}
+                {% endfor %}
+            
+            <!-- If an user doesn't have any bookshelf -->
+            {% else %}
+                <br>
+                <h3 class = "welcome">You don't have bookshelf!</h3>
+            {% endif %}
     </div>
 </div>
 

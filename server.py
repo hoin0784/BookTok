@@ -267,7 +267,8 @@ def book_search_list():
     book_title =[]
     author_names = []
     book_thumbnails = []
-    book_published_dates =[]
+    book_published_dates = []
+    book_isbn = []
 
     # Get the data from the json (title, authors, thumbnail,publishedDate)
     
@@ -276,12 +277,15 @@ def book_search_list():
       author_names.append(response['items'][i]['volumeInfo'].get('authors', [''])[0])
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
+      book_isbn.append(response['items'][i]['volumeInfo'].get('industryIdentifiers', [''])[0]['identifier'])
+
 
   return render_template('BookSearchList.html', items_length=items_length,
                                                 book_title = book_title,
                                                 author_names = author_names,
                                                 book_thumbnails = book_thumbnails,
                                                 book_published_dates = book_published_dates,
+                                                book_isbn = book_isbn,
                                                 session = session.get('user'))
 
 
@@ -346,6 +350,11 @@ def delete_bookshelf(bookshelf):
     cur.execute("DELETE FROM shelvedbooks WHERE userEmail = %s AND bookshelfName = %s;", (user_email, bookshelf,))
 
   return redirect(url_for('book_shelf'))
+
+@app.route('/book/<book_name>', methods = ['GET'])
+def book_details(book_name):
+  return render_template('book.html', session=session.get('user'),
+                                      book_name=book_name)
 
 
 # add a featured book to your bookshelf
