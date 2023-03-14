@@ -5,8 +5,7 @@
 
     <link rel="stylesheet" href="/css/pure/pure-min.css">
     <link rel="stylesheet" href="/css/pure/grids-responsive-min.css">
-    <link rel="stylesheet" href="/static/style.css">
-    <script src = "static/functions.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock %}
 
@@ -85,7 +84,7 @@
                     </select>
             
                     <button type="submit" class ="add_to_bookshelf" id="{{featured_isbn13[i]}}" value="{{featured_isbn13[i]}}" onclick="add_book(document.getElementById('{{featured_isbn13[i]}}').value, document.getElementById('shelf_{{featured_isbn13[i]}}').value, '{{featured_title[i]}}')">
-                        <img src ="static/addbutton.svg" id ="add_button"></button>
+                        <img src ="static/svg/addbutton.svg" id ="add_button"></button>
                     <br>
                     <br>
                 {% endif %}
