@@ -23,10 +23,9 @@
             <span id = "isbn">{{book_isbn13[i]}}</span><br>
             <select name="featured_shelves" id="shelf_{{book_isbn13[i]}}">
               <option value="">Select Bookshelf...</option>
-              <option value="favorites">Favorites</option>
-              <option value="list1">List 1</option>
-              <option value="list2">List 2</option>
-              <option value="list3">List 3</option>
+              {% for i in range(bookshelves_length): %}
+              <option value="{{bookshelves[i]}}">{{bookshelves[i]}}</option>
+              {% endfor %}
             </select>
         
         <button type="submit" class ="add_to_bookshelf" id="{{book_isbn13[i]}}" value="{{book_isbn13[i]}}" onclick="add_book(document.getElementById('{{book_isbn13[i]}}').value, document.getElementById('shelf_{{book_isbn13[i]}}').value, '{{comedy_title[i]}}')">

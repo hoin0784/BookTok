@@ -80,6 +80,22 @@ def logout():
 # Just added basic routes
 @app.route('/', methods = ['GET','POST'] )
 def home():
+  # Check if user is logged in
+  if session.get('user') is not None:
+    # Get user's email address
+    user_session = session.get('user')
+    user_info = user_session['userinfo']
+    user_email = user_info['email']
+
+    data = db.get_user_bookshelves(user_email)
+    bookshelves = []
+
+    for data in data:
+      bookshelves.append(data[0])
+
+    bookshelves_length = len(bookshelves)
+    print(bookshelves_length)
+
 
    # Get the value of the form when the user clicked the button
   if request.method == 'POST':
@@ -123,7 +139,7 @@ def home():
     try:
       genres = getattr(sys.modules[__name__], genres)
       
-      return genres(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13)
+      return genres(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13)
       
     except AttributeError:
       pass
@@ -162,7 +178,9 @@ def home():
 
   # Send featured list data to home.html
   # json.dump is just for debugging can be deleted later
-  return render_template('home.html', cover_url = featured_cover, 
+  return render_template('home.html', bookshelves = bookshelves,
+                                      bookshelves_length = bookshelves_length,
+                                      cover_url = featured_cover, 
                                       featured_title = featured_title, 
                                       featured_author = featured_author,
                                       featured_isbn13 = featured_isbn13,
@@ -179,9 +197,11 @@ def account():
 #   return render_template('genres.html', session = session.get('user'))
 
 @app.route('/romance')
-def romance(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def romance(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('romance.html',romance_title = book_title,
+  return render_template('romance.html',bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        romance_title = book_title,
                                         author_names = author_names,
                                         book_thumbnails = book_thumbnails,
                                         book_published_dates = book_published_dates,
@@ -190,9 +210,11 @@ def romance(book_title, author_names, book_thumbnails, book_published_dates, ite
                                         session = session.get('user'))
       
 @app.route('/thriller')
-def thriller(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def thriller(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
   
-  return render_template('thriller.html', thriller_title = book_title,
+  return render_template('thriller.html', bookshelves = bookshelves,
+                                          bookshelves_length = bookshelves_length,
+                                          thriller_title = book_title,
                                           author_names = author_names,
                                           book_thumbnails = book_thumbnails,
                                           book_published_dates = book_published_dates,
@@ -201,9 +223,11 @@ def thriller(book_title, author_names, book_thumbnails, book_published_dates, it
                                           session = session.get('user'))
 
 @app.route('/nonfiction')
-def nonfiction(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def nonfiction(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
   
-  return render_template('nonfiction.html', nonfiction_title = book_title,
+  return render_template('nonfiction.html', bookshelves = bookshelves,
+                                            bookshelves_length = bookshelves_length,
+                                            nonfiction_title = book_title,
                                             author_names = author_names,
                                             book_thumbnails = book_thumbnails,
                                             book_published_dates = book_published_dates,
@@ -212,9 +236,11 @@ def nonfiction(book_title, author_names, book_thumbnails, book_published_dates, 
                                             session = session.get('user'))
 
 @app.route('/horror')
-def horror(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def horror(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('horror.html', horror_title = book_title,
+  return render_template('horror.html', bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        horror_title = book_title,
                                         author_names = author_names,
                                         book_thumbnails = book_thumbnails,
                                         book_published_dates = book_published_dates,
@@ -223,20 +249,24 @@ def horror(book_title, author_names, book_thumbnails, book_published_dates, item
                                         session=session.get('user'))
 
 @app.route('/childrens')
-def children(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def children(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('childrens.html',  children_title = book_title,
-                                              author_names = author_names,
-                                              book_thumbnails = book_thumbnails,
-                                              book_published_dates = book_published_dates,
-                                              items_length = items_length,
-                                              book_isbn13 = book_isbn13,
-                                              session = session.get('user'))
+  return render_template('childrens.html',  bookshelves = bookshelves,
+                                            bookshelves_length = bookshelves_length,
+                                            children_title = book_title,
+                                            author_names = author_names,
+                                            book_thumbnails = book_thumbnails,
+                                            book_published_dates = book_published_dates,
+                                            items_length = items_length,
+                                            book_isbn13 = book_isbn13,
+                                            session = session.get('user'))
 
 @app.route('/comedy')
-def comedy(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def comedy(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('comedy.html', comedy_title = book_title,
+  return render_template('comedy.html', bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        comedy_title = book_title,
                                         author_names = author_names,
                                         book_thumbnails = book_thumbnails,
                                         book_published_dates = book_published_dates,
@@ -411,7 +441,7 @@ def book_details(book_isbn):
     return render_template('UnidentifiedBook.html', session = session.get('user'))
   
 
-# add a featured book to your bookshelf
+# add a book to your bookshelf
 @app.route('/add_featured_book', methods = ['POST'])
 def add_featured_book():
 
@@ -430,7 +460,7 @@ def add_featured_book():
     user_info = user_session['userinfo']
     user_email = user_info['email']
 
-    # get book isbn13/book title data to send to database
+    # get book isbn/book title data to send to database
     book_isbn13 = request.form.get('isbn13')
     book_title = request.form.get('book_title')
 
