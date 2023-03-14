@@ -317,18 +317,20 @@ def book_shelf():
                                                books=books)
 
     else:
-      # # POST request = when user searched user's bookshelf
-      # if request.form.get('book_shelf'):
+       # POST request = when user searched user's bookshelf
+    
+      if request.form.get('book_shelf'):
 
-      #   with db.get_db_cursor(commit=True) as cur:
-          
-
-
-      #   return render_template('Bookshelf.html', session=session.get('user'),
-      #                          bookshelves=bookshelves,
-      #                          books=books)
-
-      # else:
+        
+        form_content = request.form.get('book_shelf')
+        
+        with db.get_db_cursor(commit=True) as cur:
+          cur.execute("SELECT bookshelfname FROM userinfo WHERE bookshelfname = %s;", (form_content,))
+        
+        return render_template('Bookshelf.html', session=session.get('user'),
+                                bookshelves=bookshelves,
+                                books=books)
+      else:
         # POST request = When user created new bookshelf
 
         # Get new bookshelf name
