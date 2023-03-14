@@ -74,7 +74,20 @@
                 <img src = "{{cover_url[i]}}" alt="Book picture" height="300"><br>
                 <!-- <br><br> -->
                 {{featured_title[i]}}<br>
-                {{featured_author[i]}}<br><br>
+                {{featured_author[i]}}<br>
+                {% if session %}
+                    {{featured_isbn13[i]}}<br>
+                    <select name="featured_shelves" id="shelf_{{featured_isbn13[i]}}">
+                        <option value="">Select Bookshelf...</option>
+                        <option value="favorites">Favorites</option>
+                        <option value="list1">List 1</option>
+                        <option value="list2">List 2</option>
+                        <option value="list3">List 3</option>
+                    </select>
+                    <br>
+                    <button type="submit" id="{{featured_isbn13[i]}}" value="{{featured_isbn13[i]}}" onclick="add_book(document.getElementById('{{featured_isbn13[i]}}').value, document.getElementById('shelf_{{featured_isbn13[i]}}').value, '{{featured_title[i]}}')"> Add to Bookshelf </button>
+                    <br>
+                {% endif %}
             </div>         
         {% endfor %}
       </div>
@@ -82,10 +95,10 @@
     <!-- End of Featured List  -->
 
     <!-- auth debugging - delete later -->
-    {% if session %}
+    <!-- {% if session %}
         <p>json from auth: </p>
         <div><pre>{{pretty}}</pre></div>
-    {% endif %}
+    {% endif %} -->
     <!-- ============ -->
 
     <div class="footer l-box">
