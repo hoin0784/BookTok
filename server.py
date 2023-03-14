@@ -261,8 +261,6 @@ def book_search_list():
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
 
-      print(book_thumbnails)
-
   return render_template('BookSearchList.html', items_length=items_length,
                                                 book_title = book_title,
                                                 author_names = author_names,
