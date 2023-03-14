@@ -86,6 +86,7 @@ def home():
     user_info = user_session['userinfo']
     user_email = user_info['email']
 
+    # get a users bookshelf data
     data = db.get_user_bookshelves(user_email)
     bookshelves = []
 
@@ -273,6 +274,22 @@ def comedy(bookshelves, bookshelves_length, book_title, author_names, book_thumb
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def book_search_list():
+  # Check if user is logged in
+  if session.get('user') is not None:
+    # Get user's email address
+    user_session = session.get('user')
+    user_info = user_session['userinfo']
+    user_email = user_info['email']
+
+    # get a users bookshelf data
+    data = db.get_user_bookshelves(user_email)
+    bookshelves = []
+
+    for data in data:
+      bookshelves.append(data[0])
+
+    bookshelves_length = len(bookshelves)
+    # print(bookshelves_length)
 
   # This route method is almost 'POST' method 
   if request.method == 'POST':
@@ -304,9 +321,11 @@ def book_search_list():
       author_names.append(response['items'][i]['volumeInfo'].get('authors', [''])[0])
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
-      book_isbn.append(response['items'][i]['volumeInfo'].get('industryIdentifiers', [''])[0])
+      book_isbn.append(response['items'][i]['volumeInfo']['industryIdentifiers'][0]['identifier'])
 
-  return render_template('BookSearchList.html', items_length=items_length,
+  return render_template('BookSearchList.html', bookshelves = bookshelves,
+                                                bookshelves_length = bookshelves_length,
+                                                items_length=items_length,
                                                 book_title = book_title,
                                                 author_names = author_names,
                                                 book_thumbnails = book_thumbnails,
@@ -452,7 +471,7 @@ def add_featured_book():
   
   # if a legit bookshelf has been selected, continue...
   else:
-    # Get user's email address
+    # get user's email address
     user_session = session.get('user')
     user_info = user_session['userinfo']
     user_email = user_info['email']
