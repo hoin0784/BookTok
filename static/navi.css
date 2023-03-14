@@ -97,12 +97,6 @@ a.pure-button-primary {
     z-index: 4;
 }
 
-/* .home-menu .pure-menu-heading {
-    color: white;
-    font-weight: 400;
-    font-size: 120%;
-} */
-
 .logoImg {
     width: 60px;
     height: 60px;
@@ -113,17 +107,23 @@ a.pure-button-primary {
 }
 
 .home-menu a {
-    font-size: 23px;
+    /* font-size: 23px; */
     color: #2493dd;
-    /* text-decoration: underline; */
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
-    /* text-decoration: underline; */
     color: #165178;
     background-color: #ffffff;
 }
 
+.menu-atag{
+    font-size: 23px;
+}
+
+.login-atag {
+    text-decoration: none;
+    font-size: 19px;
+}
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
@@ -137,20 +137,6 @@ a.pure-button-primary {
         font-size: 16px;
     }
 
-    /* We can align the menu header to the left, but float the
-    menu items to the right. */
-    /* .home-menu {
-        text-align: left;
-    }
-        .home-menu ul {
-            float: right;
-        } */
-
-    /* We increase the height of the splash-container */
-/*    .splash-container {
-        height: 500px;
-    }*/
-
     /* We decrease the width of the .splash, since we have more width
     to work with */
     .splash {
@@ -162,7 +148,6 @@ a.pure-button-primary {
         font-size: 250%;
     }
 
-
     /* We remove the border-separator assigned to .l-box-lrg */
     .l-box-lrg {
         border: none;
@@ -171,12 +156,10 @@ a.pure-button-primary {
 }
 
 .login-button{
-    text-align: center;
+    margin-left: 0;
 }
 
 .searchBox{
-    /* width:5%; */
-    /* max-width: 500px; */
     margin-top: 25px;
 }
 
@@ -196,3 +179,14 @@ a.pure-button-primary {
     margin-top: 18px;
 }
 
+.profile-image {
+    border-radius: 2rem;
+    width: 30px; 
+    height: 30px;
+    margin-top: 8px;
+}
+
+.welcome-user {
+    margin-top: 11px;
+    font-size: 19px;
+}
