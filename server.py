@@ -277,8 +277,7 @@ def book_search_list():
       author_names.append(response['items'][i]['volumeInfo'].get('authors', [''])[0])
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
-      book_isbn.append(response['items'][i]['volumeInfo'].get('industryIdentifiers', [''])[0]['identifier'])
-
+      book_isbn.append(response['items'][i]['volumeInfo'].get('industryIdentifiers', [''])[0])
 
   return render_template('BookSearchList.html', items_length=items_length,
                                                 book_title = book_title,
@@ -378,11 +377,39 @@ def delete_bookshelf(bookshelf):
 
   return redirect(url_for('book_shelf'))
 
-@app.route('/book/<book_name>', methods = ['GET'])
-def book_details(book_name):
-  return render_template('book.html', session=session.get('user'),
-                                      book_name=book_name)
 
+# Handel books doesn't have isbn
+@app.route('/book/', methods = ['GET'])
+def book_without_isbn():
+  return render_template('UnidentifiedBook.html', session = session.get('user'))
+
+
+@app.route('/book/<book_isbn>', methods = ['GET'])
+def book_details(book_isbn):
+  url = f'https://www.googleapis.com/books/v1/volumes?q={book_isbn}&key={GOOGLE_API_KEY}'
+  response = requests.get(url).json()
+
+  if len(book_isbn) < 10:
+    return render_template('UnidentifiedBook.html', session = session.get('user')) 
+  
+  try: 
+    book_title = (response['items'][0]['volumeInfo'].get('title', ''))
+    author_names = (response['items'][0]['volumeInfo'].get('authors', [''])[0])
+    book_thumbnails = (response['items'][0]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
+    book_published_dates = (response['items'][0]['volumeInfo'].get('publishedDate', ''))
+    book_description = (response['items'][0]['volumeInfo'].get('description', ''))
+
+    return render_template('Book.html', book_title = book_title,
+                                        author_names = author_names,
+                                        book_thumbnails = book_thumbnails,
+                                        book_published_dates = book_published_dates,
+                                        book_isbn = book_isbn,
+                                        book_description=book_description,
+                                        session = session.get('user'))
+  
+  except:
+    return render_template('UnidentifiedBook.html', session = session.get('user'))
+  
 
 # add a featured book to your bookshelf
 @app.route('/add_featured_book', methods = ['POST'])

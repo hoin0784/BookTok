@@ -5,6 +5,26 @@
 
 <br>
 <br><br><br>
-<h2 class= "banner-head">{{book_name}}</h2>
+
+<h2 class= "banner-head">{{book_title}}</h2>
+<div class="book-info-container">
+    <div class="book-info-picture">
+        {% if book_thumbnails == '' %}
+            <img src="static/placeholderbook.svg" alt="Book picture" height="250"><br>
+        {% else %}
+            <img src="{{book_thumbnails}}" alt="Book picture" height="250"><br><br>
+        {% endif %}
+    </div>
+    <div class="book-info-list">
+        <li>
+            <ul>
+                {{author_names}}
+            </ul>
+            <ul>{{book_published_dates}}</ul>
+            <ul>{{book_isbn}}</ul>
+            <ul>{{book_description}}</ul>
+        </li>
+    </div>
+</div>
 
 {% endblock %}
