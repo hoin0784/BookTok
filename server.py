@@ -317,19 +317,32 @@ def book_shelf():
                                                books=books)
 
     else:
-       # POST request = when user searched user's bookshelf
-    
+      # POST request = when user searched user's bookshelf
+      # The method of filtering is similar to the code directly above.
+      # However this else statement (code from 324 - 344 ) is filtered by search_content by user's input
+
       if request.form.get('book_shelf'):
 
-        
-        form_content = request.form.get('book_shelf')
+        search_content = request.form.get('book_shelf')
         
         with db.get_db_cursor(commit=True) as cur:
-          cur.execute("SELECT bookshelfname FROM userinfo WHERE bookshelfname = %s;", (form_content,))
-        
+          cur.execute("SELECT bookshelfname FROM userinfo WHERE bookshelfname = %s;", (search_content,))
+          rows = cur.fetchall()
+          bookshelves = []
+          
+          for row in rows:
+            bookshelves.append(row[0])
+
+          books = []
+          for bookshelf in bookshelves:
+            cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (user_email, bookshelf,))
+            temp = [row for row in cur.fetchall()]
+            books.append(temp)
+
         return render_template('Bookshelf.html', session=session.get('user'),
-                                bookshelves=bookshelves,
-                                books=books)
+                                                 bookshelves=bookshelves,
+                                                 books=books)
+      
       else:
         # POST request = When user created new bookshelf
 
