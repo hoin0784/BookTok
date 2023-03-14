@@ -55,3 +55,13 @@ def get_user_bookshelves(user_email):
     with get_db_cursor(False) as cur:
         cur.execute("SELECT bookshelfname FROM userinfo WHERE useremail = %s;", (user_email,))
         return cur.fetchall()
+    
+def check_bookshelf_for_book(user_email, bookshelf_name, isbn13, book_title):
+    with get_db_cursor(True) as cur:
+        cur.execute("SELECT * FROM shelvedbooks WHERE userEmail = %s AND bookshelfName = %s AND isbn = %s;", (user_email, bookshelf_name, isbn13,))
+        if cur.fetchone() is None:
+            # not found - add book to shelf
+            cur.execute("INSERT INTO shelvedbooks (userEmail, bookshelfName, isbn, bookTitle) values (%s, %s, %s, %s)", (user_email, bookshelf_name, isbn13, book_title,))
+            return False
+        else:
+            return True

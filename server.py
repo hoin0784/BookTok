@@ -457,18 +457,15 @@ def add_featured_book():
     user_info = user_session['userinfo']
     user_email = user_info['email']
 
-    # get book isbn/book title data to send to database
+    # get book isbn/book title data
     book_isbn13 = request.form.get('isbn13')
     book_title = request.form.get('book_title')
 
-    # print(book_isbn13)
-    # print(bookshelf_name)
-    # print(book_title)
-    # print(user_email)
-
-    # everything is good, send data to database
-    db.add_book_to_bookshelf(user_email, bookshelf_name, book_isbn13, book_title)
-    print('Book added to a bookshelf.')
+    # check if book is already in user's bookshelf (no duplicates allowed)
+    # if everything is good, send data to database
+    book_in_bookshelf_status = db.check_bookshelf_for_book(user_email, bookshelf_name, book_isbn13, book_title)
+   
+    # db.add_book_to_bookshelf(user_email, bookshelf_name, book_isbn13, book_title)
     return {"random": "data1"}
 
 if __name__ == '__main__':
