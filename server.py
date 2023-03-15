@@ -81,6 +81,7 @@ def logout():
 def home():
   bookshelves = 0
   bookshelves_length = 0
+
   # Check if user is logged in
   if session.get('user') is not None:
     # Get user's email address
@@ -276,6 +277,9 @@ def comedy(bookshelves, bookshelves_length, book_title, author_names, book_thumb
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def book_search_list():
+  bookshelves = 0
+  bookshelves_length = 0
+  
   # Check if user is logged in
   if session.get('user') is not None:
     # Get user's email address
