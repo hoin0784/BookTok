@@ -22,7 +22,8 @@ CSCI 5117, Spring 2023, [assignment description](https://canvas.umn.edu/courses/
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
-* ...
+** Our most challenging and prominent feature was our Bookshelf feature, in which users can create bookshelves and add books to them.
+** 
 
 ## Testing Notes
 
@@ -38,6 +39,10 @@ along with a very brief caption:**
 
 ![](https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif)
 
+![](static/images/landingpage.png)
+![](static/images/searchresultspage.png)
+![](static/images/accountpage.png)
+![](static/images/bookshelfpage.png)
 
 ## Mock-up 
 
@@ -48,7 +53,6 @@ In this space please either provide images (around 4) showing your prototypes, O
 **[Add images/photos that show your paper prototype (around 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
 
 ![](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
-
 
 
 Link to our mock-ups: https://www.figma.com/file/0xv3ZRWf61KXjlvsNLr7UL/BookTok-WireFrame?node-id=0%3A1
