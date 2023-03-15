@@ -16,10 +16,10 @@
       {% endif %}
       <span id = "title"> {{children_title[i]}} </span><br>
       <span id = "author">{{author_names[i]}}</span><br>
-      <span id = "date">{{book_published_dates[i]}}</span><br>
+      <!-- <span id = "date">{{book_published_dates[i]}}</span><br> -->
 
       {% if session %}
-            <span id = "isbn">{{book_isbn13[i]}}</span><br>
+            <!-- <span id = "isbn">{{book_isbn13[i]}}</span><br> -->
             <select name="featured_shelves" id="shelf_{{book_isbn13[i]}}">
                   <option value="">Select Bookshelf...</option>
                   {% for i in range(bookshelves_length): %}

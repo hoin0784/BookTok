@@ -67,7 +67,7 @@
                 <span id = "title">{{featured_title[i]}} </span><br>
                 <span id = "author">{{featured_author[i]}}</span><br>
                 {% if session %}
-                    <span id="isbn">{{featured_isbn13[i]}}</span> <br>
+                    <!-- <span id="isbn">{{featured_isbn13[i]}}</span> <br> -->
                     <select name="featured_shelves" id="shelf_{{featured_isbn13[i]}}">
                         <option value="">Select Bookshelf...</option>
                         {% for i in range(bookshelves_length): %}
