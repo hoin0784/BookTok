@@ -229,7 +229,7 @@ font-size: small;
 
 }
 .add-shelf {
-  background-color:rgb(131, 219, 246);
+  background-color:rgb(162, 227, 247);
   color: #0e0d0d;
   position: absolute;
   right: 29px;
@@ -259,25 +259,34 @@ font-size: small;
 }
 
 #bookshelf{
+  align-items: center;
   display: grid;
   border-color: brown;
   border: 4px;
   /* border: 4px rgb(19, 137, 205); */
   display: flex;
-  color: black;
+  color: rgb(236, 216, 186);
   border-style: solid;
-  background-color: burlywood;
+  background-color: rgb(195, 169, 133);
   display: inline-block;
+  margin-bottom: 20px;
+  margin-right: 10px;
 }
 
 #newBookshelf{
 font-style: bold;
 font-size: larger;
-
 }
 
-#bookshelf_name{
+.shelf-delete-button {
+  background-color: #7d7d7d;
+  color: #fff;
+  font-size: 12px;
+}
 
+.bookshelves-container {
+  padding: 15px;
+  margin-left: 30px;
 }
 
 #book_individual{
