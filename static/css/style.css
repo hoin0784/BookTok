@@ -43,7 +43,6 @@ p {
 */
 
 .banner-head {
-
   text-align: center;
   margin-bottom: 50px;
   font-size: 2em;
@@ -421,4 +420,74 @@ font-size: larger;
   to {
     opacity: 1;
   }
+}
+
+/* BOOK */
+
+.book-bookcover{
+  margin: auto;
+  min-height: 350px;
+  aspect-ratio: auto;
+  display: block;
+}
+
+.book-info-picture{
+  margin-top: 5%;
+}
+
+.book-info-list {
+  margin-left: 20px;
+}
+
+.book-info-container{
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5%;
+}
+
+.book-info-review {
+  /* align-items: center; */
+  margin-top: 50px;
+  text-align: left;
+  margin-left: 15%;
+}
+
+.book-info-header{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  line-height: 40px;
+}
+
+.book-info-title{
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2em;
+  color: #0b0b0b;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+textarea {
+  margin-left: 5px;
+  width: 80%;
+  height: 120px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: both;
+}
+
+.review-button{
+  background-color: #8cdcfa;
+  text-align: center;
+  margin-top: 70px;
+  margin-left: 5px;
+}
+
+.review-style{
+  font-size: 18px;
+  letter-spacing: 1.5px;
 }

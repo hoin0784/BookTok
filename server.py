@@ -438,32 +438,54 @@ def book_without_isbn():
 
 @app.route('/book/<book_isbn>', methods = ['GET'])
 def book_details(book_isbn):
-  url = f'https://www.googleapis.com/books/v1/volumes?q={book_isbn}&key={GOOGLE_API_KEY}'
-  response = requests.get(url).json()
 
-  if len(book_isbn) < 10:
-    return render_template('UnidentifiedBook.html', session = session.get('user')) 
-  
-  try: 
-    book_title = (response['items'][0]['volumeInfo'].get('title', ''))
-    author_names = (response['items'][0]['volumeInfo'].get('authors', [''])[0])
-    book_thumbnails = (response['items'][0]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
-    book_published_dates = (response['items'][0]['volumeInfo'].get('publishedDate', ''))
-    book_description = (response['items'][0]['volumeInfo'].get('description', ''))
+  # Bring reviews for this book
+  with db.get_db_cursor(True) as cur:
+    cur.execute("SELECT review FROM managereviews WHERE isbn = %s;", (book_isbn,))
+    rows = cur.fetchall()
+    reviews = []
+    for row in rows:
+      reviews.append(row[0])
 
-    return render_template('Book.html', book_title = book_title,
-                                        author_names = author_names,
-                                        book_thumbnails = book_thumbnails,
-                                        book_published_dates = book_published_dates,
-                                        book_isbn = book_isbn,
-                                        book_description=book_description,
-                                        session = session.get('user'))
-  
-  except:
-    return render_template('UnidentifiedBook.html', session = session.get('user'))
+  if request.method == 'GET':
+
+    url = f'https://www.googleapis.com/books/v1/volumes?q={book_isbn}&key={GOOGLE_API_KEY}'
+    response = requests.get(url).json()
+
+    if len(book_isbn) < 10:
+      return render_template('UnidentifiedBook.html', session = session.get('user')) 
+    
+    try: 
+      book_title = (response['items'][0]['volumeInfo'].get('title', ''))
+      author_names = (response['items'][0]['volumeInfo'].get('authors', [''])[0])
+      book_thumbnails = (response['items'][0]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
+      book_published_dates = (response['items'][0]['volumeInfo'].get('publishedDate', ''))
+      book_description = (response['items'][0]['volumeInfo'].get('description', ''))
+
+      return render_template('Book.html', book_title = book_title,
+                                          author_names = author_names,
+                                          book_thumbnails = book_thumbnails,
+                                          book_published_dates = book_published_dates,
+                                          book_isbn = book_isbn,
+                                          book_description=book_description,
+                                          reviews=reviews,
+                                          session = session.get('user'))
+    
+    except:
+      return render_template('UnidentifiedBook.html', session = session.get('user'))
   
 
-# add a book to your bookshelf
+@app.route('/book/<book_isbn>', methods = ['POST'])
+def add_review(book_isbn):
+  submitted_review = request.form['newReview']
+
+  with db.get_db_cursor(True) as cur:
+    cur.execute("INSERT INTO managereviews(isbn, review) values (%s, %s);", (book_isbn, submitted_review,))
+
+  return redirect(url_for('book_details', book_isbn=book_isbn))
+
+
+# add a featured book to your bookshelf
 @app.route('/add_featured_book', methods = ['POST'])
 def add_featured_book():
 

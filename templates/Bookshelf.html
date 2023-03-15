@@ -30,14 +30,13 @@
             <div class="pure-button add-shelf popup">
                 <i class="fa-solid fa-plus" id = "create-new" onclick="newShelfForm()"> Create new bookshelf</i>
                 <div class="popuptext" id="popupBox">
-                    <form class="pure-form" id="newBookshelf" method="post" novalidate >
-                        <input type="text" id="bookshelf_name" name="bookshelf_name" class="pure-input searchBox" placeholder="New bookshelf name"
-                            required="" />
+                    <form class="pure-form" id="newBookshelf" method="post">
+                        <input type="text" id="bookshelfName" name="bookshelfName" class="pure-input searchBox" placeholder="New bookshelf name" required="" />
                         <br>
                         <button type="submit" class="pure-button create-shelf-button">
                             Save
                         </button>
-                        <button class="pure-button create-shelf-button" onclick="closePopup()">
+                        <button type="button" class="pure-button create-shelf-button" onclick="closePopup()">
                             Close
                         </button>
                     </form>
@@ -52,8 +51,8 @@
                         <thead>
                             {{bookshelf}}
                             <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
-                                <button type="submit" id="delete_button" onclick="delete_bookshelf()">
-                                    <img src = "static/svg/deletebutton.svg" id ="delete_button_image">
+                                <button type="submit" id="deleteButton">
+                                    delete
                                 </button>
                             </form>
                         </thead>
