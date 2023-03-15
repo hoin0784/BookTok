@@ -327,7 +327,10 @@ def book_search_list():
       author_names.append(response['items'][i]['volumeInfo'].get('authors', [''])[0])
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
-      book_isbn.append(response['items'][i]['volumeInfo']['industryIdentifiers'][0].get('identifier', ''))
+      try:
+        book_isbn.append(response['items'][i]['volumeInfo']['industryIdentifiers'][0].get('identifier', ''))
+      except:
+        book_isbn.append('x')
 
   return render_template('BookSearchList.html', bookshelves = bookshelves,
                                                 bookshelves_length = bookshelves_length,
@@ -455,6 +458,7 @@ def book_details(book_isbn):
     if len(book_isbn) < 10:
       return render_template('UnidentifiedBook.html', session = session.get('user')) 
     
+    # If book's isbn is valid
     try: 
       book_title = (response['items'][0]['volumeInfo'].get('title', ''))
       author_names = (response['items'][0]['volumeInfo'].get('authors', [''])[0])
@@ -471,10 +475,11 @@ def book_details(book_isbn):
                                           reviews=reviews,
                                           session = session.get('user'))
     
+    # Some books doesn't have valid isbn
     except:
       return render_template('UnidentifiedBook.html', session = session.get('user'))
   
-
+# Save submitted review in db
 @app.route('/book/<book_isbn>', methods = ['POST'])
 def add_review(book_isbn):
   submitted_review = request.form['newReview']
