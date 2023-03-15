@@ -200,7 +200,7 @@ def account():
 @app.route('/romance')
 def romance(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('romance.html',bookshelves = bookshelves,
+  return render_template('Romance.html',bookshelves = bookshelves,
                                         bookshelves_length = bookshelves_length,
                                         romance_title = book_title,
                                         author_names = author_names,
@@ -213,7 +213,7 @@ def romance(bookshelves, bookshelves_length, book_title, author_names, book_thum
 @app.route('/thriller')
 def thriller(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
   
-  return render_template('thriller.html', bookshelves = bookshelves,
+  return render_template('Thriller.html', bookshelves = bookshelves,
                                           bookshelves_length = bookshelves_length,
                                           thriller_title = book_title,
                                           author_names = author_names,
@@ -226,7 +226,7 @@ def thriller(bookshelves, bookshelves_length, book_title, author_names, book_thu
 @app.route('/nonfiction')
 def nonfiction(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
   
-  return render_template('nonfiction.html', bookshelves = bookshelves,
+  return render_template('Nonfiction.html', bookshelves = bookshelves,
                                             bookshelves_length = bookshelves_length,
                                             nonfiction_title = book_title,
                                             author_names = author_names,
@@ -239,7 +239,7 @@ def nonfiction(bookshelves, bookshelves_length, book_title, author_names, book_t
 @app.route('/horror')
 def horror(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('horror.html', bookshelves = bookshelves,
+  return render_template('Horror.html', bookshelves = bookshelves,
                                         bookshelves_length = bookshelves_length,
                                         horror_title = book_title,
                                         author_names = author_names,
@@ -252,7 +252,7 @@ def horror(bookshelves, bookshelves_length, book_title, author_names, book_thumb
 @app.route('/childrens')
 def children(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('childrens.html',  bookshelves = bookshelves,
+  return render_template('Childrens.html',  bookshelves = bookshelves,
                                             bookshelves_length = bookshelves_length,
                                             children_title = book_title,
                                             author_names = author_names,
@@ -265,7 +265,7 @@ def children(bookshelves, bookshelves_length, book_title, author_names, book_thu
 @app.route('/comedy')
 def comedy(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('comedy.html', bookshelves = bookshelves,
+  return render_template('Comedy.html', bookshelves = bookshelves,
                                         bookshelves_length = bookshelves_length,
                                         comedy_title = book_title,
                                         author_names = author_names,
