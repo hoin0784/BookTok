@@ -1,26 +1,3 @@
-<!-- This Navi.html is Base template ! -->
-<!-- Make sure that put the curly bracket {} and % before and after words 
-     such as (extend, block content, endblock and etc....).
-    
-     Curly braces in comments are not explicitly mentioned in the example below because,
-     they are recognized as templates and cause an error.
-    -->
-
-<!-- If you want to inherit from this base template then, use 
-     extend "Navi.html" -->
-
-<!-- If you want to write some link or styles in your child template then, use 
-     block head  
-        ...put the link or script here ! ...
-        ...but please check the duplicated link or script from base template...  
-     endblock -->
-
-<!-- if you want to write some codes in the <body> tag from child template then, use
-    block content 
-        ...write code !...
-     endblock     
--->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,13 +8,16 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" 
                                integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" 
                                crossorigin="anonymous">
-        <link rel="stylesheet" href="/static/navi.css">
+        <link rel="stylesheet" href="/static/css/navi.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+        <link rel="stylesheet" href="/css/pure/pure-min.css">
+        <link rel="stylesheet" href="/css/pure/grids-responsive-min.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script async defer src="/static/functions.js"></script>
         
         <script async defer src="static/js/add_book.js"></script>
-        <script async defer src="static/functions.js"></script>
+        <script async defer src="static/js/functions.js"></script>
         {% block head %}
         
         {% endblock %}
@@ -49,7 +29,8 @@
     </head>
     <body>
         <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-            <a href="/" class="pure-menu-heading pure-menu-link logo-atag"><img class="logoImg" src="/static/BookTokLogo.png" alt="bookTokLogo"></a>    
+            <a href="/" class="pure-menu-heading pure-menu-link logo-atag">
+                <img class="logoImg" src="/static/images/BookTokLogo.png" alt="bookTokLogo"></a>    
             <div class="pure-u-1 pure-u-md-1-3 menu-items-margin">
                 <li class="pure-menu-item">
                     <a href="/bookshelf" class="pure-menu-link menu-atag">Bookshelf</a>
@@ -63,7 +44,7 @@
                      <!-- Search list form (start)-->
                     <form class="pure-form" action="{{url_for('book_search_list')}}" method="post">
                         <input type="text" name = "book_title" class="pure-input-rounded searchBox" placeholder="Search for book" required="" />
-                        <button type="submit" class="pure-button" img src = "static/search.svg">
+                        <button type="submit" class="pure-button" img src = "static/svg/search.svg">
                             <i class="fa fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>

@@ -1,4 +1,4 @@
-{% extends "Home.html" %}
+{% extends "Navi.html" %}
 {% block title %} My Bookshelf {% endblock %}
 
 
@@ -6,7 +6,6 @@
 
 <div class="page-box">
     <div class="contents-box">
-        <br>
         <br><br><br>
 
         <h2 class="banner-head"> Your bookshelf</h2> <br><br>
@@ -16,7 +15,7 @@
 
             <form action="{{url_for('book_shelf')}}" id="bookshelf-search" method="post">
                 <input type="text" name="book_shelf" id="bookshelf-input" placeholder = "Search for bookshelf">
-                <button type="submit" class="pure-button" img src="static/search.svg">
+                <button type="submit" class="pure-button" img src="static/svg/search.svg">
                     <i class="fa fa-solid fa-magnifying-glass"></i>
                 </button>     
             </form>
@@ -48,7 +47,7 @@
             <!-- If an user has bookshelves -->
             {% if bookshelves %}
                 {% for bookshelf in bookshelves %}
-                    <table class="pure-table pure-table-bordered" id="bookshelf">
+                    <table class="pure-table-bordered" id="bookshelf">
                         <thead>
                             {{bookshelf}}
                             <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
@@ -60,7 +59,7 @@
                         <tbody>
                             {% for book in books[bookshelves.index(bookshelf)] %}
                                 <tr>
-                                    <td>{{book[0]}}</td>
+                                    <td id = "book_individual">{{book[0]}}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -71,7 +70,7 @@
             <!-- If an user doesn't have any bookshelf -->
             {% else %}
                 <br>
-                <h3 class = "welcome">You don't have bookshelf!</h3>
+                <h3 class = "welcome">You don't have any bookshelves!</h3>
             {% endif %}
     </div>
 </div>

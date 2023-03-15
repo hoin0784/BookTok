@@ -32,7 +32,6 @@ app.secret_key = env.get("APP_SECRET_KEY")
 def initialize():
   db.setup()
 
-
 # ======== Auth Stuff ===========
 oauth = OAuth(app)
 
@@ -80,6 +79,26 @@ def logout():
 # Just added basic routes
 @app.route('/', methods = ['GET','POST'] )
 def home():
+  bookshelves = 0
+  bookshelves_length = 0
+
+  # Check if user is logged in
+  if session.get('user') is not None:
+    # Get user's email address
+    user_session = session.get('user')
+    user_info = user_session['userinfo']
+    user_email = user_info['email']
+
+    # get a users bookshelf data
+    data = db.get_user_bookshelves(user_email)
+    bookshelves = []
+
+    for data in data:
+      bookshelves.append(data[0])
+
+    bookshelves_length = len(bookshelves)
+    print(bookshelves_length)
+
 
    # Get the value of the form when the user clicked the button
   if request.method == 'POST':
@@ -106,8 +125,6 @@ def home():
     book_published_dates = []
     book_isbn13 = []
 
-    print(response)
-
     for i in range(items_length):
       book_title.append(response['items'][i]['volumeInfo']['title'])
       author_names.append(response['items'][i]['volumeInfo']['authors'][0])
@@ -123,8 +140,8 @@ def home():
     try:
       genres = getattr(sys.modules[__name__], genres)
       
-      return genres(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13)
-      
+      return genres(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13)
+
     except AttributeError:
       pass
 
@@ -160,15 +177,17 @@ def home():
      
       length = len(featured_title)
 
-  # Send featured list data to home.html
-  # json.dump is just for debugging can be deleted later
-  return render_template('home.html', cover_url = featured_cover, 
-                                      featured_title = featured_title, 
-                                      featured_author = featured_author,
-                                      featured_isbn13 = featured_isbn13,
-                                      length = length,
-                                      session = session.get('user'), 
-                                      pretty=json.dumps(session.get('user'), indent=4))
+    # Send featured list data to home.html
+    # json.dump is just for debugging can be deleted later
+    return render_template('home.html', bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        cover_url = featured_cover, 
+                                        featured_title = featured_title, 
+                                        featured_author = featured_author,
+                                        featured_isbn13 = featured_isbn13,
+                                        length = length,
+                                        session = session.get('user'), 
+                                        pretty=json.dumps(session.get('user'), indent=4))
 
 @app.route('/account')
 def account():
@@ -179,20 +198,24 @@ def account():
 #   return render_template('genres.html', session = session.get('user'))
 
 @app.route('/romance')
-def romance(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def romance(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('romance.html',romance_title = book_title,
+  return render_template('romance.html',bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        romance_title = book_title,
                                         author_names = author_names,
                                         book_thumbnails = book_thumbnails,
                                         book_published_dates = book_published_dates,
                                         items_length = items_length,
                                         book_isbn13 = book_isbn13,
                                         session = session.get('user'))
-      
+
 @app.route('/thriller')
-def thriller(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def thriller(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
   
-  return render_template('thriller.html', thriller_title = book_title,
+  return render_template('thriller.html', bookshelves = bookshelves,
+                                          bookshelves_length = bookshelves_length,
+                                          thriller_title = book_title,
                                           author_names = author_names,
                                           book_thumbnails = book_thumbnails,
                                           book_published_dates = book_published_dates,
@@ -201,9 +224,11 @@ def thriller(book_title, author_names, book_thumbnails, book_published_dates, it
                                           session = session.get('user'))
 
 @app.route('/nonfiction')
-def nonfiction(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def nonfiction(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
   
-  return render_template('nonfiction.html', nonfiction_title = book_title,
+  return render_template('nonfiction.html', bookshelves = bookshelves,
+                                            bookshelves_length = bookshelves_length,
+                                            nonfiction_title = book_title,
                                             author_names = author_names,
                                             book_thumbnails = book_thumbnails,
                                             book_published_dates = book_published_dates,
@@ -212,9 +237,11 @@ def nonfiction(book_title, author_names, book_thumbnails, book_published_dates, 
                                             session = session.get('user'))
 
 @app.route('/horror')
-def horror(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def horror(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('horror.html', horror_title = book_title,
+  return render_template('horror.html', bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        horror_title = book_title,
                                         author_names = author_names,
                                         book_thumbnails = book_thumbnails,
                                         book_published_dates = book_published_dates,
@@ -223,20 +250,24 @@ def horror(book_title, author_names, book_thumbnails, book_published_dates, item
                                         session=session.get('user'))
 
 @app.route('/childrens')
-def children(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def children(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('childrens.html',  children_title = book_title,
-                                              author_names = author_names,
-                                              book_thumbnails = book_thumbnails,
-                                              book_published_dates = book_published_dates,
-                                              items_length = items_length,
-                                              book_isbn13 = book_isbn13,
-                                              session = session.get('user'))
+  return render_template('childrens.html',  bookshelves = bookshelves,
+                                            bookshelves_length = bookshelves_length,
+                                            children_title = book_title,
+                                            author_names = author_names,
+                                            book_thumbnails = book_thumbnails,
+                                            book_published_dates = book_published_dates,
+                                            items_length = items_length,
+                                            book_isbn13 = book_isbn13,
+                                            session = session.get('user'))
 
 @app.route('/comedy')
-def comedy(book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
+def comedy(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
 
-  return render_template('comedy.html', comedy_title = book_title,
+  return render_template('comedy.html', bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        comedy_title = book_title,
                                         author_names = author_names,
                                         book_thumbnails = book_thumbnails,
                                         book_published_dates = book_published_dates,
@@ -246,6 +277,25 @@ def comedy(book_title, author_names, book_thumbnails, book_published_dates, item
 
 @app.route('/BookSearchList', methods = ['GET','POST'])
 def book_search_list():
+  bookshelves = 0
+  bookshelves_length = 0
+  
+  # Check if user is logged in
+  if session.get('user') is not None:
+    # Get user's email address
+    user_session = session.get('user')
+    user_info = user_session['userinfo']
+    user_email = user_info['email']
+
+    # get a users bookshelf data
+    data = db.get_user_bookshelves(user_email)
+    bookshelves = []
+
+    for data in data:
+      bookshelves.append(data[0])
+
+    bookshelves_length = len(bookshelves)
+    # print(bookshelves_length)
 
   # This route method is almost 'POST' method 
   if request.method == 'POST':
@@ -279,7 +329,9 @@ def book_search_list():
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
       book_isbn.append(response['items'][i]['volumeInfo'].get('industryIdentifiers', [''])[0])
 
-  return render_template('BookSearchList.html', items_length=items_length,
+  return render_template('BookSearchList.html', bookshelves = bookshelves,
+                                                bookshelves_length = bookshelves_length,
+                                                items_length=items_length,
                                                 book_title = book_title,
                                                 author_names = author_names,
                                                 book_thumbnails = book_thumbnails,
@@ -447,24 +499,22 @@ def add_featured_book():
   
   # if a legit bookshelf has been selected, continue...
   else:
-    # Get user's email address
+    # get user's email address
     user_session = session.get('user')
     user_info = user_session['userinfo']
     user_email = user_info['email']
 
-    # get book isbn13/book title data to send to database
+    # get book isbn/book title data
     book_isbn13 = request.form.get('isbn13')
     book_title = request.form.get('book_title')
 
-    # print(book_isbn13)
-    # print(bookshelf_name)
-    # print(book_title)
-    # print(user_email)
-
-    # everything is good, send data to database
-    db.add_book_to_bookshelf(user_email, bookshelf_name, book_isbn13, book_title)
-    print('Book added to a bookshelf.')
-    return {"random": "data1"}
+    # check if book is already in user's bookshelf (no duplicates allowed)
+    # if everything is good, send data to database
+    book_in_bookshelf_status = db.check_bookshelf_for_book(user_email, bookshelf_name, book_isbn13, book_title)
+   
+    print(book_in_bookshelf_status)
+    # db.add_book_to_bookshelf(user_email, bookshelf_name, book_isbn13, book_title)
+    return jsonify(status = book_in_bookshelf_status)
 
 if __name__ == '__main__':
 
