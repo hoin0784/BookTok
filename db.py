@@ -65,3 +65,8 @@ def check_bookshelf_for_book(user_email, bookshelf_name, isbn13, book_title):
             return False
         else:
             return True
+        
+def select_user_info(bookshelf):
+    with get_db_cursor(True) as cur:
+        cur.execute("SELECT userEmail FROM userinfo WHERE bookshelfName = %s;", (bookshelf,))
+        return cur.fetchall()

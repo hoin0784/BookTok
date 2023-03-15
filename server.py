@@ -343,17 +343,113 @@ def book_search_list():
                                                 session = session.get('user'))
 
 
+# @app.route('/bookshelf', methods = ['GET','POST'])
+# def book_shelf():
+#   if session.get('user') is None:
+#     return render_template('UserOnly.html', session = session.get('user'))
+
+#   else:
+#     bookshelf_status = True
+
+#     # Get user's email address
+#     user_session = session.get('user')
+#     user_info = user_session['userinfo']
+#     user_email = user_info['email']
+
+#     with db.get_db_cursor(True) as cur:
+#       # Get user's bookshelf list
+#       cur.execute("SELECT bookshelfname FROM userinfo WHERE useremail = %s;", (user_email,))
+#       rows = cur.fetchall()
+#       bookshelves = []
+#       for row in rows:
+#         bookshelves.append(row[0])
+      
+#       # Get list of shelved books
+#       books = []
+#       for bookshelf in bookshelves:
+#         cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (user_email, bookshelf,))
+#         temp = [row for row in cur.fetchall()]
+#         books.append(temp)
+
+#     if request.method == 'GET':
+#       return render_template('Bookshelf.html', session=session.get('user'),
+#                                                bookshelves=bookshelves,
+#                                                books=books, 
+#                                                bookshelf_status = bookshelf_status)
+
+#     else:
+#       # POST request = when user searched user's bookshelf
+#       # The method of filtering is similar to the code directly above.
+#       # However this else statement (code from 324 - 344 ) is filtered by search_content by user's input
+
+#       bookshelf_status = False
+
+#       if request.form.get('book_shelf'):
+
+#         search_content = request.form.get('book_shelf')
+
+#         # get unique user emails w/ the bookshelf name searched
+#         user_bookshelf = db.select_user_info(search_content)
+#         bookshelf_user = []
+        
+#         for user_bookshelf in user_bookshelf:
+#           bookshelf_user.append(user_bookshelf[0])
+
+#         print(bookshelf_user)
+
+#       # for i in bookshelf_user:
+#         with db.get_db_cursor(commit=True) as cur:
+#           cur.execute("SELECT bookshelfname FROM userinfo WHERE bookshelfname = %s;", (search_content,))
+#           rows = cur.fetchall()
+#           bookshelves = []
+          
+#           for row in rows:
+#             bookshelves.append(row[0])
+
+#           print(len(bookshelves))
+#           books = []
+#           # for i in range(len(bookshelves)):
+#             # print(bookshelf_user[i])
+#             # print(bookshelves[i])
+#           for bookshelf in bookshelves:
+#             # cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (bookshelf_user[i], bookshelves[i],))
+#             temp = [row for row in cur.fetchall()]
+#             books.append(temp)
+
+#             print(books)
+            
+
+      #   return render_template('Bookshelf.html', session=session.get('user'),
+      #                                           bookshelves=bookshelves,
+      #                                           books=books,
+      #                                           bookshelf_status = bookshelf_status)
+      
+      # else:
+      #   # POST request = When user created new bookshelf
+
+      #   # Get new bookshelf name
+      #   new_bookshelf = request.form.get('bookshelfName')
+      #   bookshelves.append(new_bookshelf)
+        
+      #   with db.get_db_cursor(True) as cur:
+      #     # Create a bookshelf in database
+      #     cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
+            
+      #     # Render the HTML code for the newly created bookshelf
+      #   return render_template('Bookshelf.html', session=session.get('user'),
+      #                                           bookshelves=bookshelves,
+      #                                           books=books)
+    
 @app.route('/bookshelf', methods = ['GET','POST'])
 def book_shelf():
   if session.get('user') is None:
     return render_template('UserOnly.html', session = session.get('user'))
-
   else:
+    bookshelf_status = True
     # Get user's email address
     user_session = session.get('user')
     user_info = user_session['userinfo']
     user_email = user_info['email']
-
     with db.get_db_cursor(True) as cur:
       # Get user's bookshelf list
       cur.execute("SELECT bookshelfname FROM userinfo WHERE useremail = %s;", (user_email,))
@@ -361,62 +457,59 @@ def book_shelf():
       bookshelves = []
       for row in rows:
         bookshelves.append(row[0])
-      
       # Get list of shelved books
       books = []
       for bookshelf in bookshelves:
         cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (user_email, bookshelf,))
         temp = [row for row in cur.fetchall()]
         books.append(temp)
-
     if request.method == 'GET':
       return render_template('Bookshelf.html', session=session.get('user'),
                                                bookshelves=bookshelves,
-                                               books=books)
-
+                                               books=books,
+                                               bookshelf_status = bookshelf_status)
+    
     else:
       # POST request = when user searched user's bookshelf
       # The method of filtering is similar to the code directly above.
       # However this else statement (code from 324 - 344 ) is filtered by search_content by user's input
 
-      if request.form.get('book_shelf'):
+      bookshelf_status = False
 
+      if request.form.get('book_shelf'):
         search_content = request.form.get('book_shelf')
-        
         with db.get_db_cursor(commit=True) as cur:
           cur.execute("SELECT bookshelfname FROM userinfo WHERE bookshelfname = %s;", (search_content,))
           rows = cur.fetchall()
           bookshelves = []
-          
           for row in rows:
             bookshelves.append(row[0])
-
           books = []
           for bookshelf in bookshelves:
             cur.execute("SELECT bookTitle FROM shelvedbooks WHERE useremail = %s AND bookshelfname = %s;", (user_email, bookshelf,))
             temp = [row for row in cur.fetchall()]
             books.append(temp)
-
         return render_template('Bookshelf.html', session=session.get('user'),
                                                  bookshelves=bookshelves,
-                                                 books=books)
-      
+                                                 books=books,
+                                                 bookshelf_status = bookshelf_status)
+    
       else:
         # POST request = When user created new bookshelf
-
         # Get new bookshelf name
+        bookshelf_status = True
+
         new_bookshelf = request.form.get('bookshelfName')
         bookshelves.append(new_bookshelf)
-        
         with db.get_db_cursor(True) as cur:
           # Create a bookshelf in database
           cur.execute("INSERT INTO userinfo(userEmail, bookshelfName) values (%s, %s);", (user_email, new_bookshelf,))
-            
           # Render the HTML code for the newly created bookshelf
         return render_template('Bookshelf.html', session=session.get('user'),
                                                 bookshelves=bookshelves,
-                                                books=books)
-    
+                                                books=books,
+                                                bookshelf_status = bookshelf_status)
+      
 
 @app.route('/delete/<bookshelf>', methods = ['POST'])
 def delete_bookshelf(bookshelf):
