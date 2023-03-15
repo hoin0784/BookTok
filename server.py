@@ -327,7 +327,7 @@ def book_search_list():
       author_names.append(response['items'][i]['volumeInfo'].get('authors', [''])[0])
       book_thumbnails.append(response['items'][i]['volumeInfo'].get('imageLinks', {}).get('thumbnail', ''))
       book_published_dates.append(response['items'][i]['volumeInfo'].get('publishedDate', ''))
-      book_isbn.append(response['items'][i]['volumeInfo'].get('industryIdentifiers', [''])[0])
+      book_isbn.append(response['items'][i]['volumeInfo']['industryIdentifiers'][0].get('identifier', ''))
 
   return render_template('BookSearchList.html', bookshelves = bookshelves,
                                                 bookshelves_length = bookshelves_length,
