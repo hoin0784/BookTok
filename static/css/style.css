@@ -261,6 +261,8 @@ font-size: small;
 #bookshelf{
   display: grid;
   border-color: brown;
+  border: 4px;
+  /* border: 4px rgb(19, 137, 205); */
   display: flex;
   color: black;
   border-style: solid;
@@ -451,7 +453,8 @@ font-size: larger;
 
 .book-info-review {
   /* align-items: center; */
-  margin-top: 50px;
+  margin-top: 30px;
+  margin-bottom: 40px;
   text-align: left;
   margin-left: 15%;
 }

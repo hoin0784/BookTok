@@ -47,7 +47,7 @@
             <!-- If an user has bookshelves -->
             {% if bookshelves %}
                 {% for bookshelf in bookshelves %}
-                    <table class="pure-table-bordered" id="bookshelf">
+                    <table class="pure-table pure-table-bordered" id="bookshelf">
                         <thead>
                             {{bookshelf}}
                             <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
@@ -64,7 +64,6 @@
                             {% endfor %}
                         </tbody>
                     </table>
-
                 {% endfor %}
             
             <!-- If an user doesn't have any bookshelf -->
