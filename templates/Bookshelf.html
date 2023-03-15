@@ -58,11 +58,13 @@
                     <tr>
                         <th>
                             <h3>{{bookshelf}}</h3>
+                            {% if bookshelf_status %}
                             <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
                                 <button type="submit" class="pure-button shelf-delete-button" id="deleteButton">
                                     delete
                                 </button>
                             </form>
+                            {% endif %}
                         </th>
                     </tr>
                     <tbody>
