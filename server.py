@@ -101,52 +101,52 @@ def home():
 
 
    # Get the value of the form when the user clicked the button
-  if request.method == 'POST':
-    for key, value in request.form.items():
-      if key == 'romance':
-        genres = key
-      elif key == 'thriller':
-        genres = key
-      elif key == 'nonfiction':
-        genres = key
-      elif key == 'horror':
-        genres = key
-      elif key == 'comedy':
-        genres = key
-      else:
-        genres = 'children'
+  # if request.method == 'POST':
+  #   for key, value in request.form.items():
+  #     if key == 'romance':
+  #       genres = key
+  #     elif key == 'thriller':
+  #       genres = key
+  #     elif key == 'nonfiction':
+  #       genres = key
+  #     elif key == 'horror':
+  #       genres = key
+  #     elif key == 'comedy':
+  #       genres = key
+  #     else:
+  #       genres = 'children'
     
-    request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&maxResults=12&key={GOOGLE_API_KEY}'
-    response = requests.get(request_url).json()
-    items_length = len(response['items'])
-    book_title = []
-    author_names = []
-    book_thumbnails = []
-    book_published_dates = []
-    book_isbn13 = []
+  #   request_url = f'https://www.googleapis.com/books/v1/volumes?q=subject:{genres}&maxResults=12&key={GOOGLE_API_KEY}'
+  #   response = requests.get(request_url).json()
+  #   items_length = len(response['items'])
+  #   book_title = []
+  #   author_names = []
+  #   book_thumbnails = []
+  #   book_published_dates = []
+  #   book_isbn13 = []
 
-    for i in range(items_length):
-      book_title.append(response['items'][i]['volumeInfo']['title'])
-      author_names.append(response['items'][i]['volumeInfo']['authors'][0])
-      book_published_dates.append(response['items'][i]['volumeInfo']['publishedDate'])
-      book_isbn13.append(response['items'][i]['volumeInfo']['industryIdentifiers'][0]['identifier'])
+  #   for i in range(items_length):
+  #     book_title.append(response['items'][i]['volumeInfo']['title'])
+  #     author_names.append(response['items'][i]['volumeInfo']['authors'][0])
+  #     book_published_dates.append(response['items'][i]['volumeInfo']['publishedDate'])
+  #     book_isbn13.append(response['items'][i]['volumeInfo']['industryIdentifiers'][0]['identifier'])
 
-    # check if imageLinks is defined before appending to book_thumbnails
-      if 'imageLinks' in response['items'][i]['volumeInfo']:
-          book_thumbnails.append(response['items'][i]['volumeInfo']['imageLinks']['thumbnail'])
-      else:
-          book_thumbnails.append(None)
+  #   # check if imageLinks is defined before appending to book_thumbnails
+  #     if 'imageLinks' in response['items'][i]['volumeInfo']:
+  #         book_thumbnails.append(response['items'][i]['volumeInfo']['imageLinks']['thumbnail'])
+  #     else:
+  #         book_thumbnails.append(None)
 
-    try:
-      genres = getattr(sys.modules[__name__], genres)
+  #   try:
+  #     genres = getattr(sys.modules[__name__], genres)
       
-      return genres(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13)
+  #     return genres(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13)
 
-    except AttributeError:
-      pass
+  #   except AttributeError:
+  #     pass
 
-  # If the method is ['GET] then just call NYT best seller
-  else:
+  # # If the method is ['GET] then just call NYT best seller
+  # else:
     
     # Requests NYT Bestseller 'combined print and ebook fiction' list (there's a lot of lists we can request)
     request_url = f"https://api.nytimes.com/svc/books/v3/lists/current/Combined%20Print%20and%20E-Book%20Fiction.json?api-key={NYT_API_KEY}"
