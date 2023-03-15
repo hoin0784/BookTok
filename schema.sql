@@ -14,7 +14,7 @@ CREATE TABLE shelvedBooks (
 CREATE TABLE manageReviews (
   isbn varchar(20) not null,
   review varchar not null
-)
+);
 
 insert into userinfo(useremail, bookshelfname) values ('kim01540@umn.edu', '');
 
