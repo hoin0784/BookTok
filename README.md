@@ -39,10 +39,10 @@ along with a very brief caption:**
 
 ![](https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif)
 
-![](static/images/landingpage.png)
-![](static/images/searchresultspage.png)
-![](static/images/accountpage.png)
-![](static/images/bookshelfpage.png)
+![](static/images/landingpage.png?raw=true)
+![](static/images/searchresultspage.png?raw=true)
+![](static/images/accountpage.png?raw=true)
+![](static/images/bookshelfpage.png?raw=true)
 
 ## Mock-up 
 
