@@ -79,6 +79,8 @@ def logout():
 # Just added basic routes
 @app.route('/', methods = ['GET','POST'] )
 def home():
+  bookshelves = 0
+  bookshelves_length = 0
   # Check if user is logged in
   if session.get('user') is not None:
     # Get user's email address
@@ -138,7 +140,7 @@ def home():
       genres = getattr(sys.modules[__name__], genres)
       
       return genres(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13)
-      
+
     except AttributeError:
       pass
 
@@ -174,17 +176,17 @@ def home():
      
       length = len(featured_title)
 
-  # Send featured list data to home.html
-  # json.dump is just for debugging can be deleted later
-  return render_template('home.html', bookshelves = bookshelves,
-                                      bookshelves_length = bookshelves_length,
-                                      cover_url = featured_cover, 
-                                      featured_title = featured_title, 
-                                      featured_author = featured_author,
-                                      featured_isbn13 = featured_isbn13,
-                                      length = length,
-                                      session = session.get('user'), 
-                                      pretty=json.dumps(session.get('user'), indent=4))
+    # Send featured list data to home.html
+    # json.dump is just for debugging can be deleted later
+    return render_template('home.html', bookshelves = bookshelves,
+                                        bookshelves_length = bookshelves_length,
+                                        cover_url = featured_cover, 
+                                        featured_title = featured_title, 
+                                        featured_author = featured_author,
+                                        featured_isbn13 = featured_isbn13,
+                                        length = length,
+                                        session = session.get('user'), 
+                                        pretty=json.dumps(session.get('user'), indent=4))
 
 @app.route('/account')
 def account():
@@ -206,7 +208,7 @@ def romance(bookshelves, bookshelves_length, book_title, author_names, book_thum
                                         items_length = items_length,
                                         book_isbn13 = book_isbn13,
                                         session = session.get('user'))
-      
+
 @app.route('/thriller')
 def thriller(bookshelves, bookshelves_length, book_title, author_names, book_thumbnails, book_published_dates, items_length, book_isbn13):
   
