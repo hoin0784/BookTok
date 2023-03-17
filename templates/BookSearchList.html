@@ -22,7 +22,7 @@
 			<!-- {{book_published_dates[i]}} -->
 			<!-- {{book_isbn[i]}} -->
 			{% if session %}
-				<span id="isbn">{{book_isbn[i]}}</span> <br>
+				<!-- <span id="isbn">{{book_isbn[i]}}</span> <br> -->
 				<select name="featured_shelves" id="shelf_{{book_isbn[i]}}">
 					<option value="">Select Bookshelf...</option>
 					{% for i in range(bookshelves_length): %}
