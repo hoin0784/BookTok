@@ -49,40 +49,68 @@
         </div>
         
         <br><br>
-        
-        <!-- If an user has bookshelves -->
-        {% if bookshelves %}
-            <div class="bookshelves-container">
-            {% for bookshelf in bookshelves %}
-                <table class="pure-table-bordered" id="bookshelf">
-                    <tr>
-                        <th>
-                            <h3>{{bookshelf}}</h3>
-                            {% if bookshelf_status %}
-                            <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
-                                <button type="submit" class="pure-button shelf-delete-button" id="deleteButton">
-                                    delete
-                                </button>
-                            </form>
-                            {% endif %}
-                        </th>
-                    </tr>
-                    <tbody>
-                        {% for book in books[bookshelves.index(bookshelf)] %}
+
+        <!-- if user is searching for specific bookshelf name -->
+        {% if searched_bookshelf %}
+            {% if books %}    
+            <div class="bookshelves-container"> 
+                {% for book in books %}
+                    <table class="pure-table-bordered" id="bookshelf">
+                        <tr>
+                            <th>
+                                <h3>{{bookshelves[0]}}</h3>
+                            </th>
+                        </tr>
+                        <tbody>
                             <tr>
-                                <td id = "book_individual">{{book[0]}}</td>
+                                {% for i in book %}
+                                <td id = "book_individual">{{i[0]}}</td>
+                                {% endfor %}
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
             </div>
+            <!-- no results matching search exist -->
+            {% else %}
+                <br>
+                <h3 class = "welcome">No bookshelves found!</h3>
+            {% endif %}
         
-        <!-- If an user doesn't have any bookshelf -->
+        <!-- else, show users own bookshelves -->
         {% else %}
-            <br>
-            <h3 class = "welcome">You don't have any bookshelves!</h3>
+            <!-- If an user has bookshelves -->
+            {% if bookshelves %}
+                <div class="bookshelves-container">
+                {% for bookshelf in bookshelves %}
+                    <table class="pure-table-bordered" id="bookshelf">
+                        <tr>
+                            <th>
+                                <h3>{{bookshelf}}</h3>
+                                <form class="pure-form" id="deleteBookshelf" method="post" action="/delete/{{bookshelf}}">
+                                    <button type="submit" class="pure-button shelf-delete-button" id="deleteButton">
+                                        delete
+                                    </button>
+                                </form>
+                            </th>
+                        </tr>
+                        <tbody>
+                            {% for book in books[bookshelves.index(bookshelf)] %}
+                                <tr>
+                                    <td id = "book_individual">{{book[0]}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
+                </div>
+            <!-- If an user doesn't have any bookshelf -->
+            {% else %}
+                <br>
+                <h3 class = "welcome">You don't have any bookshelves!</h3>
+            {% endif %}
         {% endif %}
+
     </div>
 </div>
 
